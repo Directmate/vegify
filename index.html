@@ -1,730 +1,665 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fresh Veggie Hub | Wholesale & Home Delivery</title>
-    <style>
-        :root {
-            --primary: #2e7d32;
-            --primary-dark: #1b5e20;
-            --accent: #81c784;
-            --light: #f4fbf7;
-            --dark: #2c3e50;
-            --whatsapp: #25D366;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Angel One Authorised Person – Balotra | Mutual Fund, SIP, Stocks, IPO</title>
+<meta name="description" content="Balotra me Demat account, Mutual Fund SIP, Stocks, IPO aur Trading ke liye Angel One Authorised Person. Free guidance paiye.">
+<style>
+:root{--ink:#111827;--muted:#6b7280;--line:#e5e7eb;--soft:#f8f9fb;--accent:#2f80ed;--accentbg:#eaf3ff;--green:#16a34a;--greenbg:#ecfdf3;--r:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;background:#fff;color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1080px;margin:auto;padding:0 22px}
+section{padding:84px 0}
+h2{font-size:clamp(26px,3.6vw,34px);text-align:center;margin-bottom:10px;font-weight:700;letter-spacing:-.4px}
+.sub{text-align:center;color:var(--muted);max-width:560px;margin:0 auto 44px}
+.btn{display:inline-block;padding:13px 24px;border-radius:12px;font-weight:600;border:1px solid transparent;cursor:pointer;font-size:15px;transition:.2s;font-family:inherit}
+.btn-o{background:var(--ink);color:#fff}
+.btn-o:hover{background:#000;transform:translateY(-2px)}
+.btn-g{background:var(--green);color:#fff}
+.btn-g:hover{background:#15803d;transform:translateY(-2px)}
+.btn-w{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn-w:hover{border-color:var(--ink)}
+/* nav */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-weight:700;font-size:19px;letter-spacing:-.3px}.logo span{color:var(--accent)}
+.links{display:flex;gap:26px;align-items:center}
+.links a{color:var(--muted);font-size:14.5px;transition:.2s}.links a:hover{color:var(--ink)}
+.links a.btn{color:#fff;padding:9px 18px;font-size:14px}
+.menu{display:none;background:none;border:0;color:var(--ink);font-size:26px;cursor:pointer}
+/* hero */
+.hero{padding:90px 0 100px;background:radial-gradient(900px 400px at 85% -10%,var(--accentbg),transparent 70%),#fff}
+.hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.tag{display:inline-block;background:var(--soft);border:1px solid var(--line);padding:6px 14px;border-radius:30px;font-size:13px;color:var(--muted);margin-bottom:18px}
+.hero h1{font-size:clamp(32px,5vw,52px);line-height:1.15;margin-bottom:18px;letter-spacing:-1px;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--muted);font-size:18px;margin-bottom:28px;max-width:520px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.hcard{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:0 20px 50px rgba(17,24,39,.07)}
+.hcard h3{font-size:19px;margin-bottom:4px}
+.ticker{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.ticker b{color:var(--ink);font-size:20px}
+/* stats */
+.stats{padding:0 0 20px}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--r);padding:0;overflow:hidden}
+.stat{padding:26px 18px;text-align:center;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat b{font-size:28px;color:var(--ink);display:block;letter-spacing:-.5px}
+.stat span{font-size:13px;color:var(--muted)}
+/* services */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;transition:.25s}
+.card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 14px 30px rgba(17,24,39,.07)}
+.ic{width:48px;height:48px;border-radius:12px;background:var(--accentbg);display:grid;place-items:center;font-size:24px;margin-bottom:16px}
+.card h3{margin-bottom:6px;font-size:17.5px}
+.card p{color:var(--muted);font-size:14.5px;margin-bottom:14px}
+.card a{color:var(--accent);font-weight:600;font-size:14.5px}
+/* calculator */
+.calc{background:var(--soft)}
+.cbox{display:grid;grid-template-columns:1fr 1fr;gap:36px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:34px}
+.fld{margin-bottom:24px}
+.fld label{display:flex;justify-content:space-between;font-size:14.5px;margin-bottom:10px;color:var(--muted)}
+.fld label b{color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.res{background:var(--greenbg);border-radius:18px;padding:28px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.res small{color:var(--muted)}
+.res .big{font-size:40px;font-weight:800;color:var(--green);margin:4px 0 16px;letter-spacing:-1px}
+.row{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid rgba(22,163,74,.2);font-size:14.5px}
+.note{font-size:12px;color:var(--muted);margin-top:16px;text-align:center}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;counter-reset:s}
+.step{padding:6px 4px;text-align:left}
+.step:before{counter-increment:s;content:"0" counter(s);display:block;font-size:34px;font-weight:800;color:var(--line);margin-bottom:6px;letter-spacing:-1px}
+.step h3{margin-bottom:4px;font-size:17px}.step p{font-size:14.5px;color:var(--muted)}
+/* why */
+.why{background:var(--soft)}
+.wl{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.wi{display:flex;gap:14px;padding:20px;border-radius:14px;background:#fff;border:1px solid var(--line)}
+.wi i{font-style:normal;font-size:24px}.wi b{display:block}.wi span{font-size:14px;color:var(--muted)}
+/* branches */
+.bgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;max-width:840px;margin:auto}
+.bcard{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;transition:.25s}
+.bcard:hover{border-color:var(--accent);box-shadow:0 14px 30px rgba(17,24,39,.07)}
+.bcard .bt{display:inline-block;background:var(--accentbg);color:var(--accent);font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:.4px}
+.bcard h3{font-size:23px;margin-bottom:4px;letter-spacing:-.4px}
+.bcard p{color:var(--muted);font-size:15px;margin-bottom:4px}
+.bcard .btn{margin-top:18px;padding:11px 20px;font-size:14.5px}
+/* faq */
+#faq{background:var(--soft)}
+.faq{max-width:740px;margin:auto}
+.q{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.q button{width:100%;text-align:left;padding:18px 22px;background:none;border:0;font-size:15.5px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;color:var(--ink);font-family:inherit}
+.q button:after{content:"+";font-size:22px;color:var(--accent);line-height:1}
+.q.open button:after{content:"–"}
+.q div{max-height:0;overflow:hidden;transition:.3s;padding:0 22px;color:var(--muted);font-size:14.5px}
+.q.open div{max-height:200px;padding-bottom:18px}
+/* contact */
+.cwrap{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:start}
+.info p{margin-bottom:14px;color:var(--muted)}
+.info p b{color:var(--ink)}
+.form{background:#fff;border:1px solid var(--line);padding:30px;border-radius:22px;box-shadow:0 20px 50px rgba(17,24,39,.07)}
+.form h3{margin-bottom:18px;font-size:19px}
+.form input,.form select,.form textarea{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:12px;font-size:15px;margin-bottom:14px;font-family:inherit;outline:none;background:var(--soft);color:var(--ink);transition:.2s}
+.form input:focus,.form select:focus,.form textarea:focus{border-color:var(--accent);background:#fff}
+.form .btn{width:100%}
+.err{color:#d92d20;font-size:13px;margin:-8px 0 10px;display:none}
+.ok{display:none;text-align:center;color:var(--green);font-weight:600;margin-top:12px;font-size:14px}
+/* footer */
+footer{background:var(--soft);border-top:1px solid var(--line);color:var(--muted);padding:36px 0 96px;font-size:12.5px}
+footer p{margin-bottom:8px}
+.fl{color:var(--ink);font-weight:700;font-size:15px}
+/* floating wa */
+.wa{position:fixed;right:18px;bottom:18px;z-index:60;background:#25d366;color:#fff;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:28px;box-shadow:0 8px 22px rgba(37,211,102,.45);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.5)}70%{box-shadow:0 0 0 16px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+.rv{opacity:0;transform:translateY(24px);transition:.7s}
+.rv.show{opacity:1;transform:none}
+@media(max-width:820px){
+ .hero .wrap,.cbox,.cwrap{grid-template-columns:1fr}
+ .stats .wrap{grid-template-columns:repeat(2,1fr)}
+ .stat:nth-child(2){border-right:0}
+ .stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+ .menu{display:block}
+ .links{display:none;position:absolute;top:66px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;padding:20px;gap:16px}
+ .links.open{display:flex}
+ section{padding:60px 0}
+ .hero{padding:56px 0 64px}
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* Header & Navigation */
-        header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1350&q=80') center/cover;
-            height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding: 0 1rem;
-        }
-
-        .hero-content {
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 0.8rem 1.8rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.2s, background-color 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-whatsapp {
-            background: var(--whatsapp);
-            color: white;
-        }
-
-        /* Client Social Proof Banner */
-        .client-banner {
-            background: white;
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid #eee;
-            text-align: center;
-        }
-
-        .client-banner p {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #777;
-            font-weight: bold;
-            margin-bottom: 0.8rem;
-        }
-
-        .client-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2.5rem;
-            flex-wrap: wrap;
-            font-weight: bold;
-            color: #444;
-            font-size: 1.05rem;
-        }
-
-        /* Section Layouts */
-        .section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            color: var(--primary-dark);
-            margin-bottom: 2.5rem;
-        }
-
-        /* Enhanced "Who We Serve" Professional Section */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 2rem;
-        }
-
-        .serve-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .serve-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
-        }
-
-        .serve-img-container {
-            position: relative;
-            height: 220px;
-            overflow: hidden;
-        }
-
-        .serve-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .serve-card:hover .serve-img-container img {
-            transform: scale(1.05);
-        }
-
-        .badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(27, 94, 32, 0.9);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            padding: 6px 14px;
-            border-radius: 20px;
-            letter-spacing: 0.5px;
-            backdrop-filter: blur(4px);
-        }
-
-        .serve-body {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .serve-body h3 {
-            color: var(--primary-dark);
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .serve-body p.subtitle {
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .serve-body ul {
-            list-style: none;
-            margin-bottom: 1.8rem;
-            flex-grow: 1;
-        }
-
-        .serve-body li {
-            margin-bottom: 0.6rem;
-            padding-left: 1.5rem;
-            position: relative;
-            font-size: 0.95rem;
-            color: #444;
-        }
-
-        .serve-body li::before {
-            content: "✓";
-            color: var(--primary);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        /* Enhanced Product Category Grid with Real Images */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.8rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .product-img {
-            height: 180px;
-            width: 100%;
-            object-fit: cover;
-        }
-
-        .product-info {
-            padding: 1.2rem;
-            text-align: center;
-        }
-
-        .product-info h4 {
-            color: var(--dark);
-            font-size: 1.15rem;
-            margin-bottom: 0.4rem;
-        }
-
-        .product-info p {
-            color: #666;
-            font-size: 0.88rem;
-        }
-
-        /* Trust Badges */
-        .trust-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .trust-card {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            text-align: center;
-        }
-
-        /* Reviews / Testimonials */
-        .review-card {
-            background: white;
-            padding: 1.8rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .rating {
-            color: #ffc107;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .author-info {
-            margin-top: 1rem;
-            border-top: 1px solid #f0f0f0;
-            padding-top: 0.8rem;
-        }
-
-        /* FAQ Styling */
-        .faq-item {
-            background: white;
-            margin-bottom: 1rem;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-            cursor: pointer;
-        }
-
-        .faq-item summary {
-            font-weight: bold;
-            color: var(--primary-dark);
-            outline: none;
-        }
-
-        .faq-item p {
-            margin-top: 0.5rem;
-            color: #555;
-            font-size: 0.95rem;
-        }
-
-        /* Floating WhatsApp Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background-color: var(--whatsapp);
-            color: white;
-            border-radius: 50px;
-            padding: 12px 20px;
-            font-weight: bold;
-            box-shadow: 2px 5px 15px rgba(0,0,0,0.3);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 1000;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .nav-links { display: none; }
-        }
-    </style>
+/* ===== richer light theme ===== */
+h2:after{content:"";display:block;width:48px;height:4px;border-radius:4px;background:var(--accent);margin:12px auto 0}
+.btn-o{background:var(--accent);box-shadow:0 8px 20px rgba(47,128,237,.35)}
+.btn-o:hover{background:#1f6fd8}
+.btn-g{box-shadow:0 8px 20px rgba(22,163,74,.3)}
+.hero{position:relative;overflow:hidden;padding-bottom:120px;background:linear-gradient(135deg,#eaf4ff 0%,#f7fbff 100%)}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%}
+.hero:before{width:380px;height:380px;right:-90px;top:-130px;background:rgba(47,128,237,.14)}
+.hero:after{width:280px;height:280px;left:-90px;bottom:-120px;background:rgba(14,165,233,.12)}
+.hero .wrap{position:relative;z-index:1}
+.hcard{border-top:5px solid var(--accent)}
+.ticker b{color:var(--accent)}
+.stats{margin-top:-56px;position:relative;z-index:2;padding-bottom:10px}
+.stats .wrap{border:0;gap:16px;overflow:visible;border-radius:0}
+.stat{background:#fff;border:0!important;border-radius:16px;box-shadow:0 12px 30px rgba(17,24,39,.09)}
+.stat b{color:var(--accent)}
+.card{border-top:4px solid var(--c,var(--accent));box-shadow:0 6px 18px rgba(17,24,39,.05)}
+.card .ic{background:var(--ib,var(--accentbg))}
+.card:nth-child(1){--c:#2f80ed;--ib:#e8f1ff}
+.card:nth-child(2){--c:#16a34a;--ib:#e8f7ee}
+.card:nth-child(3){--c:#0ea5e9;--ib:#e0f4ff}
+.card:nth-child(4){--c:#6366f1;--ib:#eceeff}
+.card:nth-child(5){--c:#14b8a6;--ib:#e0f7f4}
+.card:nth-child(6){--c:#3b9bff;--ib:#e6f2ff}
+.card a{color:var(--c,var(--accent))}
+.calc{background:linear-gradient(135deg,#eaf3ff,#f6faff)}
+.cbox{box-shadow:0 20px 50px rgba(17,24,39,.08)}
+.res{background:linear-gradient(135deg,#16a34a,#0f8a3f);color:#fff}
+.res small{color:#d6f5e1}
+.res .big{color:#fff}
+.row{border-top:1px solid rgba(255,255,255,.3)}
+.row b,#oG{color:#fff!important}
+.step{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 22px;text-align:center;box-shadow:0 6px 18px rgba(17,24,39,.05)}
+.step:before{width:46px;height:46px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;margin:0 auto 14px;font-size:16px;box-shadow:0 6px 14px rgba(47,128,237,.35)}
+.wi{box-shadow:0 4px 14px rgba(17,24,39,.04)}
+.wi i{width:46px;height:46px;flex:none;border-radius:12px;background:var(--accentbg);display:grid;place-items:center}
+.bcard{border-top:4px solid var(--accent);background:linear-gradient(160deg,#fff,#eaf3ff);box-shadow:0 10px 28px rgba(17,24,39,.07)}
+.bcard:nth-child(2){border-top-color:#0ea5e9;background:linear-gradient(160deg,#fff,#e6f6ff)}
+.bcard:nth-child(2) .bt{background:#dff3ff;color:#0284c7}
+.contact{background:linear-gradient(135deg,#2563c9,#4a9bf5);color:#fff}
+.contact h2{color:#fff}
+.contact .sub{color:#e3efff}
+.contact .info p{color:#eef5ff}
+.contact .info p b{color:#fff}
+.contact .form{box-shadow:0 24px 60px rgba(0,0,0,.35)}
+footer{background:#12315f;border-top:0;color:#b4c6e6}
+.fl{color:#fff}
+.soft{background:var(--soft)}
+#faq{background:#fff}
+.tabs{display:flex;gap:8px;justify-content:center;margin:-16px 0 26px}
+.tabs button{padding:10px 22px;border-radius:30px;border:1px solid var(--line);background:#fff;font-weight:600;cursor:pointer;font-family:inherit;color:var(--muted)}
+.tabs button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pill{display:inline-block;background:var(--greenbg);color:var(--green);font-size:12px;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:10px}
+.stars{color:#f5a524;letter-spacing:2px;margin-bottom:8px}
+.card small{color:var(--muted)}
+.abt{display:grid;grid-template-columns:220px 1fr;gap:44px;align-items:center;max-width:820px;margin:auto}
+.abt h2{text-align:left}.abt h2:after{margin-left:0}
+.av{width:220px;height:220px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#0ea5e9) center/cover;color:#fff;display:grid;place-items:center;font-size:84px;font-weight:800;box-shadow:0 16px 40px rgba(47,128,237,.3);border:6px solid #fff}
+.abt p{color:var(--muted);margin-bottom:14px}
+.chk{list-style:none}.chk li{padding:4px 0}.chk li:before{content:"✓ ";color:var(--green);font-weight:800}
+.band{display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:linear-gradient(135deg,#e6f6ff,#eaf3ff);border:1px solid var(--line);border-radius:22px;padding:30px 34px}
+.band h3{font-size:21px}.band p{color:var(--muted)}
+.bbtn{display:flex;gap:10px;flex-wrap:wrap}
+.map{width:100%;height:170px;border:0;border-radius:14px;margin-top:16px}
+.bcard .dir{display:inline-block;margin:18px 0 0 14px;color:var(--accent);font-weight:600;font-size:14.5px}
+@media(max-width:820px){.abt{grid-template-columns:1fr;text-align:center}.abt h2{text-align:center}.abt h2:after{margin:12px auto 0}.av{margin:auto;width:160px;height:160px;font-size:60px}}
+.grev{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;max-width:900px;margin:0 auto 24px}
+.gcard{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 24px;box-shadow:0 8px 22px rgba(17,24,39,.06)}
+.gl{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-weight:800;font-size:22px;color:#4285f4;flex:none}
+.gb{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+.gb .btn{padding:10px 16px;font-size:14px}
+#revEmbed{margin-bottom:20px}
+@media(max-width:820px){.gb{margin-left:0}.grev{grid-template-columns:1fr}}
+.pill.up{background:#e8f1ff;color:#2f80ed}
+.card.closing{border:1px solid #f04438;border-top:4px solid #f04438;box-shadow:0 0 0 3px rgba(240,68,56,.12)}
+.pill.today{background:#fee4e2;color:#d92d20;margin-left:6px;animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.55}}
+</style>
+<meta property="og:title" content="Angel One Authorised Person – Balotra &amp; Ahmedabad">
+<meta property="og:description" content="Demat, Mutual Fund SIP, Stocks aur IPO ke liye free guidance.">
+<meta property="og:type" content="website">
+<meta name="keywords" content="Angel One Balotra, Angel One Authorised Person Balotra, Demat account Balotra, Mutual fund SIP Balotra, IPO Balotra, Bhati Investment, Manglik Investment Ahmedabad">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"FinancialService","name":"Bhati Investment","areaServed":"Balotra","address":{"@type":"PostalAddress","addressLocality":"Balotra","addressRegion":"Rajasthan","addressCountry":"IN"}},{"@type":"FinancialService","name":"Manglik Investment","areaServed":"Ahmedabad","address":{"@type":"PostalAddress","addressLocality":"Ahmedabad","addressRegion":"Gujarat","addressCountry":"IN"}}]}</script>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <header>
-        <div class="nav-container">
-            <div class="logo">🥦 Fresh Veggie Hub</div>
-            <ul class="nav-links">
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#who-we-serve">Who We Serve</a></li>
-                <li><a href="#categories">Categories</a></li>
-                <li><a href="#order-builder">Quick Order</a></li>
-                <li><a href="#reviews">Reviews</a></li>
-                <li><a href="#faq">FAQ</a></li>
-            </ul>
-        </div>
-    </header>
+<header>
+ <div class="wrap">
+  <nav>
+   <a href="#home" class="logo">📈 <span data-bind="brand">Your Name</span></a>
+   <button class="menu" id="menu" aria-label="Menu">☰</button>
+   <div class="links" id="links">
+    <a href="#services">Services</a>
+    <a href="#branches">Branches</a>
+    <a href="#calc">Calculator</a>
+    <a href="#ipo">IPO</a>
+    <a href="#learn">Learn</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact" class="btn btn-o" style="padding:9px 20px">Free Account Kholein</a>
+   </div>
+  </nav>
+ </div>
+</header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Farm-Fresh Vegetables Delivered Daily</h1>
-            <p>Supplying top-grade produce to Restaurants, Hotels, Cafes, and Homes.</p>
-            <div class="btn-group">
-                <a href="#who-we-serve" class="btn btn-primary">Commercial Supply (B2B)</a>
-                <a href="https://wa.me/9256695100?text=Hi!%20I%20want%20to%20place%20an%20order%20for%20fresh%20vegetables." class="btn btn-whatsapp">💬 Quick Order on WhatsApp</a>
-            </div>
-        </div>
-    </section>
+<section class="hero" id="home">
+ <div class="wrap">
+  <div>
+   <span class="tag">🏆 Angel One Authorised Person • Balotra &amp; Ahmedabad</span>
+   <h1>Apne paise ko <em>growth</em> ka sahi raasta dikhayein</h1>
+   <p>Demat account, Mutual Fund SIP, Stocks aur IPO — sab ek jagah. Balotra me local guidance, seedhe WhatsApp par support.</p>
+   <div class="cta">
+    <a href="#contact" class="btn btn-o">Free Demat Account Kholein →</a>
+    <a href="#" class="btn btn-w" data-wa="Namaste, mujhe investment ke baare me jaankari chahiye.">💬 WhatsApp Par Baat Karein</a>
+   </div>
+  </div>
+  <div class="hcard">
+   <h3>🎯 Sirf ₹500 se SIP shuru</h3>
+   <p style="color:var(--muted);font-size:14px;margin:0">Chhoti bachat, bada future. Aaj hi start karein.</p>
+   <div class="ticker"><div>Demat Opening<br><b>₹0*</b></div><div>Account Setup<br><b>~15 min</b></div><div>Support<br><b>WhatsApp</b></div></div>
+   <p style="font-size:11px;color:var(--muted);margin:12px 0 0">*Charges Angel One ki current policy ke anusar lagu honge.</p>
+  </div>
+ </div>
+</section>
 
-    <!-- Client Social Proof Bar -->
-    <div class="client-banner">
-        <p>Trusted Daily By Top Kitchens & Local Businesses</p>
-        <div class="client-logos">
-            <span>🍳 The Green Bistro</span>
-            <span>🏨 Grand Hotel & Suites</span>
-            <span>☕ Urban Cafe</span>
-            <span>🍕 Express Pizzeria</span>
-            <span>🥗 Fresh Bowl Co.</span>
-        </div>
-    </div>
+<section class="stats">
+ <div class="wrap rv">
+  <div class="stat"><b data-count="2000" data-suf="+">0</b><span>Khush Clients</span></div>
+  <div class="stat"><b data-count="5" data-suf="+ Yrs">0</b><span>Market Experience</span></div>
+  <div class="stat"><b data-count="100" data-suf="%">0</b><span>Digital Process</span></div>
+  <div class="stat"><b data-count="24" data-suf="x7">0</b><span>WhatsApp Support</span></div>
+ </div>
+</section>
 
-    <!-- Why Choose Us / Trust Badges -->
-    <section class="section" id="about">
-        <h2 class="section-title">Why Choose Fresh Veggie Hub?</h2>
-        <div class="trust-grid">
-            <div class="trust-card">
-                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">👨‍🌾</div>
-                <h4 style="margin-bottom: 0.3rem;">Direct Farm Sourced</h4>
-                <p style="font-size: 0.9rem; color: #666;">Harvested daily at dawn from trusted local partner farms.</p>
-            </div>
-            <div class="trust-card">
-                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🧼</div>
-                <h4 style="margin-bottom: 0.3rem;">100% Hygienic Cleaning</h4>
-                <p style="font-size: 0.9rem; color: #666;">Triple-washed, ozone-sanitized, and packed in clean crates.</p>
-            </div>
-            <div class="trust-card">
-                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🚚</div>
-                <h4 style="margin-bottom: 0.3rem;">Early Morning Delivery</h4>
-                <p style="font-size: 0.9rem; color: #666;">On-time early morning drop-offs before kitchen prep starts.</p>
-            </div>
-            <div class="trust-card">
-                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">⚖️</div>
-                <h4 style="margin-bottom: 0.3rem;">Exact Weight Guarantee</h4>
-                <p style="font-size: 0.9rem; color: #666;">Precision digital weighing ensures full value on every order.</p>
-            </div>
-        </div>
-    </section>
+<section id="services">
+ <div class="wrap">
+  <h2 class="rv">Hamari Services</h2>
+  <p class="sub rv">Beginner ho ya experienced investor — aapke goal ke hisaab se sahi solution.</p>
+  <div class="grid">
+   <div class="card rv"><div class="ic">🏦</div><h3>Demat & Trading Account</h3><p>Paperless account opening, aadhaar se e-sign, jaldi activation.</p><a href="#" data-wa="Mujhe Demat & Trading account kholna hai.">Account kholein →</a></div>
+   <div class="card rv"><div class="ic">🔄</div><h3>Mutual Fund SIP</h3><p>₹500 se monthly SIP. Goal-based planning: ghar, shaadi, retirement.</p><a href="#" data-wa="Mujhe Mutual Fund SIP ke baare me jaankari chahiye.">SIP shuru karein →</a></div>
+   <div class="card rv"><div class="ic">📊</div><h3>Stock Investment</h3><p>Delivery & intraday trading, research tools aur guidance.</p><a href="#" data-wa="Mujhe Stock Investment ke baare me guidance chahiye.">Jaankari lein →</a></div>
+   <div class="card rv"><div class="ic">🚀</div><h3>IPO Application</h3><p>Naye IPO ki update aur UPI se aasan application me madad.</p><a href="#" data-wa="Mujhe IPO updates aur application me help chahiye.">IPO alerts paayein →</a></div>
+   <div class="card rv"><div class="ic">🧾</div><h3>Futures & Options</h3><p>Risk samajh ke F&O trading, margin aur strategy ki basic samajh.</p><a href="#" data-wa="Mujhe F&O trading ke baare me jaankari chahiye.">Poochhein →</a></div>
+   <div class="card rv"><div class="ic">📢</div><h3>Daily Market Updates</h3><p>WhatsApp Channel par IPO, OFS aur market updates — free me.</p><a href="#" data-wa="Mujhe daily market updates wale WhatsApp Channel ka link bhejein.">Channel join karein →</a></div>
+  </div>
+ </div>
+</section>
 
-    <!-- Professional "Who We Serve" Section -->
-    <section class="section" id="who-we-serve">
-        <h2 class="section-title">Tailored Supply Solutions</h2>
-        <div class="services-grid">
-            
-            <!-- Card 1: Commercial / B2B -->
-            <div class="serve-card">
-                <div class="serve-img-container">
-                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" alt="Restaurant Commercial Kitchen">
-                    <span class="badge">B2B Wholesale</span>
-                </div>
-                <div class="serve-body">
-                    <h3>🏢 Commercial Supply</h3>
-                    <p class="subtitle">Custom bulk produce solutions for high-volume food service operations.</p>
-                    <ul>
-                        <li>Restaurants, Hotels, Cafes & Cloud Kitchens</li>
-                        <li>Guaranteed early morning delivery (5:30 AM - 8:00 AM)</li>
-                        <li>Strict quality grading & volume bulk discounts</li>
-                        <li>Flexible weekly & monthly account billing</li>
-                    </ul>
-                    <a href="https://wa.me/9256695100?text=Hi!%20I%20run%20a%20restaurant/hotel%20and%20would%20like%20to%20request%20your%20wholesale%20price%20list." class="btn btn-primary" style="width: 100%; justify-content: center;">Request Commercial Rates</a>
-                </div>
-            </div>
+<section class="calc" id="calc">
+ <div class="wrap">
+  <h2 class="rv">SIP Calculator &amp; Goal Planner</h2>
+  <p class="sub rv">Dekhiye chhoti monthly bachat time ke saath kitni badh sakti hai.</p>
+  <div class="tabs"><button class="on" data-t="s">SIP Calculator</button><button data-t="g">Goal Planner</button></div>
+  <div class="cbox rv" id="boxSip">
+   <div>
+    <div class="fld"><label>Monthly Investment <b id="vA">₹5,000</b></label><input type="range" id="rA" min="500" max="100000" step="500" value="5000"></div>
+    <div class="fld"><label>Expected Return (p.a.) <b id="vR">12%</b></label><input type="range" id="rR" min="6" max="20" step="0.5" value="12"></div>
+    <div class="fld"><label>Time Period <b id="vY">10 saal</b></label><input type="range" id="rY" min="1" max="30" step="1" value="10"></div>
+    <a id="sipWa" class="btn btn-o" target="_blank" rel="noopener">Meri SIP Plan Karein →</a>
+   </div>
+   <div class="res">
+    <small>Estimated Total Value</small>
+    <div class="big" id="oT">₹0</div>
+    <div class="row"><span>Invested Amount</span><b id="oI">₹0</b></div>
+    <div class="row"><span>Estimated Returns</span><b id="oG" style="color:var(--green)">₹0</b></div>
+   </div>
+  </div>
+  <div class="cbox" id="boxGoal" style="display:none">
+   <div>
+    <div class="fld"><label>Goal Amount <b id="vgT">₹10,00,000</b></label><input type="range" id="gT" min="100000" max="20000000" step="100000" value="1000000"></div>
+    <div class="fld"><label>Kitne saal me <b id="vgY">10 saal</b></label><input type="range" id="gY" min="1" max="30" step="1" value="10"></div>
+    <div class="fld"><label>Expected Return (p.a.) <b id="vgR">12%</b></label><input type="range" id="gR" min="6" max="20" step="0.5" value="12"></div>
+    <a id="goalWa" class="btn btn-o" target="_blank" rel="noopener">Meri Planning Karwayein →</a>
+   </div>
+   <div class="res">
+    <small>Goal ke liye har mahine chahiye</small>
+    <div class="big" id="gO">₹0</div>
+    <div class="row"><span>Total Invest</span><b id="gI">₹0</b></div>
+   </div>
+  </div>
+  <p class="note">Yeh sirf illustration hai. Actual returns market par depend karte hain aur guaranteed nahi hain.</p>
+ </div>
+</section>
 
-            <!-- Card 2: Household / B2C -->
-            <div class="serve-card">
-                <div class="serve-img-container">
-                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80" alt="Fresh Home Delivery Vegetables">
-                    <span class="badge">Home Delivery</span>
-                </div>
-                <div class="serve-body">
-                    <h3>🏠 Residential & Households</h3>
-                    <p class="subtitle">Fresh, hand-picked produce straight from farms to your kitchen doorstep.</p>
-                    <ul>
-                        <li>Same-day doorstep delivery for local homes</li>
-                        <li>Hygiene-washed, sorted & eco-packed</li>
-                        <li>No rigid minimum orders—buy exact quantities</li>
-                        <li>Curated weekly family basket options</li>
-                    </ul>
-                    <a href="#order-builder" class="btn btn-whatsapp" style="width: 100%; justify-content: center;">Build Home Order</a>
-                </div>
-            </div>
+<section id="ipo">
+ <div class="wrap">
+  <h2 class="rv">IPO Corner</h2>
+  <p class="sub rv">Chal rahe aur aane wale IPO ki jaankari. Apply karne me madad paayein.</p>
+  <div class="grid" id="ipoList"></div>
+  <p class="note" style="color:var(--muted)">Details apply karne se pehle NSE/BSE ya Angel One app par verify karein.</p>
+ </div>
+</section>
 
-        </div>
-    </section>
+<section id="how">
+ <div class="wrap">
+  <h2 class="rv">Shuru Karna Bahut Aasan Hai</h2>
+  <p class="sub rv">Ghar baithe 4 simple steps me.</p>
+  <div class="steps">
+   <div class="step rv"><h3>Form Bharein</h3><p>Neeche form me naam aur mobile number bhejein.</p></div>
+   <div class="step rv"><h3>WhatsApp Par Baat</h3><p>Main aapko seedha WhatsApp par contact karunga.</p></div>
+   <div class="step rv"><h3>Documents</h3><p>Aadhaar, PAN aur bank details se online KYC.</p></div>
+   <div class="step rv"><h3>Invest Karein</h3><p>Account active hote hi SIP, stocks ya IPO shuru.</p></div>
+  </div>
+ </div>
+</section>
 
-    <!-- Product Category Showcase (Real Images) -->
-    <section class="section" id="categories">
-        <h2 class="section-title">Fresh Category Highlights</h2>
-        <div class="products-grid">
-            
-            <div class="product-card">
-                <img class="product-img" src="https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=600&q=80" alt="Leafy Greens">
-                <div class="product-info">
-                    <h4>Leafy Greens</h4>
-                    <p>Spinach, Kale, Crisp Lettuce, Parsley & Fresh Herbs</p>
-                </div>
-            </div>
+<section class="why">
+ <div class="wrap">
+  <h2 class="rv">Mujhe Hi Kyun Chunein?</h2>
+  <p class="sub rv">Sirf account nahi, ek bharosemand sathi.</p>
+  <div class="wl">
+   <div class="wi rv"><i>🤝</i><div><b>Personal Guidance</b><span>Balotra me local, seedhi baat — koi call center nahi.</span></div></div>
+   <div class="wi rv"><i>🛡️</i><div><b>Angel One Platform</b><span>SEBI registered broker ka secure aur trusted platform.</span></div></div>
+   <div class="wi rv"><i>⚡</i><div><b>Fast Support</b><span>Aapke sawal ka jawab WhatsApp par jaldi.</span></div></div>
+   <div class="wi rv"><i>🎓</i><div><b>Beginner Friendly</b><span>Pehli baar invest kar rahe hain? Main step-by-step samjhaunga.</span></div></div>
+  </div>
+ </div>
+</section>
 
-            <div class="product-card">
-                <img class="product-img" src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80" alt="Daily Staples">
-                <div class="product-info">
-                    <h4>Daily Staples</h4>
-                    <p>Potatoes, Onions, Fresh Tomatoes & Garlic Bulbs</p>
-                </div>
-            </div>
+<section id="about">
+ <div class="wrap abt">
+  <div class="av rv" id="avatar"></div>
+  <div class="rv">
+   <h2>Mere Baare Me</h2>
+   <p>Namaste! Main <b data-bind="brand">Your Name</b>, Angel One ka Authorised Person. Balotra aur Ahmedabad ke investors ko Demat, SIP, Stocks aur IPO me seedhi aur saaf guidance deta hun, bina kisi jhoothe vaade ke.</p>
+   <ul class="chk"><li>Beginner-friendly samjhaana</li><li>Paperless account opening</li><li>WhatsApp par jaldi jawab</li></ul>
+  </div>
+ </div>
+</section>
 
-            <div class="product-card">
-                <img class="product-img" src="https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=600&q=80" alt="Exotic Produce">
-                <div class="product-info">
-                    <h4>Exotic Produce</h4>
-                    <p>Broccoli, Zucchini, Bell Peppers & Mushrooms</p>
-                </div>
-            </div>
+<section class="soft" id="reviews">
+ <div class="wrap">
+  <h2 class="rv">Clients Kya Kehte Hain</h2>
+  <p class="sub rv">Google par hamare clients ke reviews padhein.</p>
+  <div class="grev" id="gRev"></div>
+  <div id="revEmbed"></div>
+  <div class="grid" id="revList"></div>
+ </div>
+</section>
 
-            <div class="product-card">
-                <img class="product-img" src="https://images.unsplash.com/photo-1447175008436-08417090ea76?auto=format&fit=crop&w=600&q=80" alt="Root Vegetables">
-                <div class="product-info">
-                    <h4>Root Vegetables</h4>
-                    <p>Farm Carrots, Beetroots, Radishes & Yams</p>
-                </div>
-            </div>
+<section class="branches" id="branches">
+ <div class="wrap">
+  <h2 class="rv">Hamari Branches</h2>
+  <p class="sub rv">Rajasthan aur Gujarat — dono jagah aapki seva me.</p>
+  <div class="bgrid">
+   <div class="bcard rv">
+    <span class="bt">📍 BALOTRA</span>
+    <h3>Bhati Investment</h3>
+    <p>Balotra, Rajasthan</p>
+    <p>Demat • SIP • Stocks • IPO</p>
+    <a href="#" class="btn btn-g" data-wa="Namaste, mujhe Bhati Investment (Balotra branch) se baat karni hai.">💬 Is Branch Se Baat Karein</a>
+    <a class="dir" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Bhati+Investment+Balotra">📍 Directions</a>
+    <iframe class="map" loading="lazy" title="Bhati Investment Balotra map" src="https://maps.google.com/maps?q=Bhati%20Investment%20Balotra&output=embed"></iframe>
+   </div>
+   <div class="bcard rv">
+    <span class="bt">📍 AHMEDABAD</span>
+    <h3>Manglik Investment</h3>
+    <p>Ahmedabad, Gujarat</p>
+    <p>Demat • SIP • Stocks • IPO</p>
+    <a href="#" class="btn btn-g" data-wa="Namaste, mujhe Manglik Investment (Ahmedabad branch) se baat karni hai.">💬 Is Branch Se Baat Karein</a>
+    <a class="dir" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Manglik+Investment+Ahmedabad">📍 Directions</a>
+    <iframe class="map" loading="lazy" title="Manglik Investment Ahmedabad map" src="https://maps.google.com/maps?q=Manglik%20Investment%20Ahmedabad&output=embed"></iframe>
+   </div>
+  </div>
+ </div>
+</section>
 
-        </div>
-    </section>
+<section class="soft" id="learn">
+ <div class="wrap">
+  <h2 class="rv">Investing Seekhein</h2>
+  <p class="sub rv">Basics, aasan Hinglish me.</p>
+  <div class="grid">
+   <div class="card rv"><div class="ic">📘</div><h3>SIP kya hai?</h3><p>SIP me aap har mahine ek tay rakam Mutual Fund me lagate hain. Chhoti, regular bachat se lambe time me badi rakam banane ki aadat banti hai. Returns market par depend karte hain.</p></div>
+   <div class="card rv"><div class="ic">🗂️</div><h3>Demat account kya hota hai?</h3><p>Demat account me aapke shares aur securities digital form me surakshit rehte hain, jaise bank account me paisa. Stocks kharidne-bechne ke liye ye zaroori hai.</p></div>
+   <div class="card rv"><div class="ic">🚀</div><h3>IPO kaise bharein?</h3><p>Demat account aur UPI ID ke saath IPO ki bid lagate hain. Allotment lottery se hota hai, to guarantee nahi hoti. Apply karne se pehle company ke documents zaroor padhein.</p></div>
+  </div>
+ </div>
+</section>
 
-    <!-- Interactive Custom Order Builder -->
-    <section class="section" id="order-builder" style="background: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; max-width: 600px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 1.5rem; color: #1b5e20;">Quick Order Builder</h2>
-        
-        <!-- Customer Info Fields -->
-        <div style="display: grid; gap: 1rem; margin-bottom: 1.5rem;">
-            <label style="font-weight: bold; font-size: 0.9rem;">Customer Details:</label>
-            <input type="text" id="custName" placeholder="Your Full Name *" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 100%;">
-            <input type="tel" id="custPhone" placeholder="Your Mobile Number *" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 100%;">
-            <textarea id="custAddress" placeholder="Full Delivery Address / Restaurant Name *" rows="2" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 100%; font-family: inherit;"></textarea>
-        </div>
+<section id="faq">
+ <div class="wrap">
+  <h2 class="rv">Aksar Poochhe Jaane Wale Sawal</h2>
+  <p class="sub rv">&nbsp;</p>
+  <div class="faq">
+   <div class="q"><button>Demat account kholne me kitna time lagta hai?</button><div>Documents ready ho to online process aam taur par kuch hi der me complete ho jata hai. Activation me thoda samay lag sakta hai.</div></div>
+   <div class="q"><button>SIP kam se kam kitne se shuru hoti hai?</button><div>Kai Mutual Funds me SIP ₹100–₹500 se bhi shuru ho sakti hai. Fund ke hisaab se alag ho sakta hai.</div></div>
+   <div class="q"><button>Kya Mutual Fund me paisa surakshit hai?</button><div>Mutual Fund market risk ke adheen hote hain. Returns guaranteed nahi hote, isliye goal aur risk ke hisaab se fund chunna zaroori hai.</div></div>
+   <div class="q"><button>IPO me apply kaise karte hain?</button><div>Demat account aur UPI ID se aap IPO ke liye apply kar sakte hain. Main application me aapki madad karunga.</div></div>
+   <div class="q"><button>Kya aap guaranteed returns dete hain?</button><div>Nahi. Koi bhi genuine advisor ya broker guaranteed returns ka vaada nahi kar sakta. Main sirf sahi jaankari aur platform support deta hun.</div></div>
+  </div>
+ </div>
+</section>
 
-        <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 1.5rem;">
+<section id="updates" style="padding:56px 0">
+ <div class="wrap">
+  <div class="band rv">
+   <div><h3>📢 Free Market Updates</h3><p>IPO, OFS aur market ki khabrein seedha WhatsApp Channel par.</p></div>
+   <div class="bbtn">
+    <a id="chBtn" class="btn btn-g" target="_blank" rel="noopener">Channel Join Karein</a>
+    <a id="plBtn" class="btn btn-w" target="_blank" rel="noopener">▶ Play Store</a>
+    <a id="apBtn" class="btn btn-w" target="_blank" rel="noopener"> App Store</a>
+   </div>
+  </div>
+ </div>
+</section>
 
-        <!-- Veggie Selection with Custom Quantity -->
-        <label style="font-weight: bold; font-size: 0.9rem; display: block; margin-bottom: 0.5rem;">Select Items & Quantity:</label>
-        
-        <div style="display: grid; gap: 1rem;">
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
-                <label style="cursor: pointer; flex-grow: 1;">
-                    <input type="checkbox" id="item1" value="Potato"> 🥔 Potato
-                </label>
-                <input type="text" id="qty1" placeholder="e.g. 5 kg" style="width: 100px; padding: 6px; border: 1px solid #ccc; border-radius: 5px; text-align: center;">
-            </div>
+<section class="contact" id="contact">
+ <div class="wrap">
+  <h2 class="rv">Free Consultation Paayein</h2>
+  <p class="sub rv">Form bharein — details seedhe mere WhatsApp par aa jayengi.</p>
+  <div class="cwrap">
+   <div class="info rv">
+    <p>📍 <b>Bhati Investment</b> – Balotra, Rajasthan</p>
+    <p>📍 <b>Manglik Investment</b> – Ahmedabad, Gujarat</p>
+    <p>📞 <span data-bind="phone">+91 XXXXX XXXXX</span></p>
+    <p>🕘 Mon–Sat: 10:00 AM – 7:00 PM</p>
+    <p style="margin-top:20px"><a href="#" class="btn btn-g" data-wa="Namaste, mujhe aapse baat karni hai.">💬 Seedha WhatsApp Karein</a></p>
+   </div>
+   <form class="form rv" id="leadForm" novalidate>
+    <h3>📝 Apni Details Bharein</h3>
+    <input type="text" id="fName" placeholder="Aapka Naam *">
+    <div class="err" id="eName">Kripya naam likhein.</div>
+    <input type="tel" id="fPhone" placeholder="Mobile Number (10 digit) *" maxlength="10">
+    <div class="err" id="ePhone">Sahi 10 digit mobile number daalein.</div>
+    <select id="fService">
+     <option value="Demat Account">Demat / Trading Account</option>
+     <option value="Mutual Fund SIP">Mutual Fund SIP</option>
+     <option value="Stock Investment">Stock Investment</option>
+     <option value="IPO">IPO</option>
+     <option value="F&O Trading">Futures & Options</option>
+     <option value="Anya">Kuch aur</option>
+    </select>
+    <select id="fBranch">
+     <option value="Bhati Investment (Balotra)">Branch: Bhati Investment – Balotra</option>
+     <option value="Manglik Investment (Ahmedabad)">Branch: Manglik Investment – Ahmedabad</option>
+    </select>
+    <select id="fTime">
+     <option value="Koi bhi time">Call ka time: Koi bhi</option>
+     <option value="Subah (9-12)">Subah (9–12)</option>
+     <option value="Dopahar (12-4)">Dopahar (12–4)</option>
+     <option value="Shaam (4-7)">Shaam (4–7)</option>
+    </select>
+    <input type="text" id="fCity" placeholder="Shehar (e.g. Balotra)" value="Balotra">
+    <textarea id="fMsg" rows="3" placeholder="Aapka sawal (optional)"></textarea>
+    <button type="submit" class="btn btn-g">WhatsApp Par Bhejein ➤</button>
+    <div class="ok" id="ok">✅ WhatsApp khul raha hai — wahan "Send" dabayein.</div>
+   </form>
+  </div>
+ </div>
+</section>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
-                <label style="cursor: pointer; flex-grow: 1;">
-                    <input type="checkbox" id="item2" value="Onion"> 🧅 Onion
-                </label>
-                <input type="text" id="qty2" placeholder="e.g. 3 kg" style="width: 100px; padding: 6px; border: 1px solid #ccc; border-radius: 5px; text-align: center;">
-            </div>
+<footer>
+ <div class="wrap">
+  <p class="fl">📈 <span data-bind="brand">Your Name</span> — Authorised Person of Angel One Limited</p>
+  <p>Branches: Bhati Investment (Balotra, Rajasthan) | Manglik Investment (Ahmedabad, Gujarat)</p>
+  <p>AP Reg. No.: <span data-bind="apReg">XXXXXXXX</span> | Angel One Limited SEBI Reg. No.: INZ000161534 (verify on SEBI/Angel One website)</p>
+  <p>Disclaimer: Securities investment market risks ke adheen hai, scheme se related sabhi documents dhyan se padhein. Past performance future returns ki guarantee nahi hai. Is website par di gayi jaankari sirf educational hai, investment advice nahi.</p>
+  <p>© <span id="yr"></span> All rights reserved.</p>
+ </div>
+</footer>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
-                <label style="cursor: pointer; flex-grow: 1;">
-                    <input type="checkbox" id="item3" value="Tomatoes"> 🍅 Tomatoes
-                </label>
-                <input type="text" id="qty3" placeholder="e.g. 2 kg" style="width: 100px; padding: 6px; border: 1px solid #ccc; border-radius: 5px; text-align: center;">
-            </div>
+<a href="#" class="wa" data-wa="Namaste, mujhe investment ke baare me jaankari chahiye." aria-label="WhatsApp">💬</a>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
-                <label style="cursor: pointer; flex-grow: 1;">
-                    <input type="checkbox" id="item4" value="Spinach"> 🥬 Fresh Spinach
-                </label>
-                <input type="text" id="qty4" placeholder="e.g. 2 bundles" style="width: 100px; padding: 6px; border: 1px solid #ccc; border-radius: 5px; text-align: center;">
-            </div>
+<script>
+/* ====== YAHAN APNI DETAILS BHARIYE ====== */
+const CONFIG = {
+  brand: "Bhati-Investment",              // apna naam / brand
+  waNumber: "917742411438",        // 91 + 10 digit number, bina + ya space ke
+  phone: "+91 7742411438",
+  address: "Balotra, Rajasthan",
+  apReg: "AP01061201120381",              // apni AP registration number
+  photo: "",                       // apni photo ka link (khali = pehla akshar dikhega)
+  channelUrl: "",                  // WhatsApp Channel ka link (khali = WhatsApp par link maangne ka message)
+  playStore: "",                   // Angel One app ka apna referral link (Play Store)
+  appStore: "",                    // Angel One app ka apna referral link (App Store)
+  sheetUrl: "",                    // Google Apps Script Web App URL (leads sheet me save hone ke liye)
+  gaId: "",                        // Google Analytics ID, jaise G-XXXXXXXXXX
+  // Google Sheet (Publish to web > CSV) ka link. Bharne par IPO list sheet se apne aap aayegi
+  ipoSheetUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vThxJCqZ9_cSOz_OidL0MP_fyoW2qhka9OYYGTL5Hngs1flCRsTSdbEBR9aU5HBvzb0oESovoYgm7xy/pub?gid=1879798118&single=true&output=csv",
+  // Sheet na ho to ye manual list chalegi (khali [] = section chhup jayega). Sheet use karein to ise [] kar dein
+  ipos: [],
+  // Google reviews: view = apni Google Business listing ka link, write = "Review likhein" ka link (khali = button nahi dikhega)
+  googleReviews: [
+    {name:"Bhati Investment", city:"Balotra", view:"", write:""},
+    {name:"Manglik Investment", city:"Ahmedabad", view:"", write:""}
+  ],
+  // Optional: Trustindex/Elfsight jaise review widget ka embed code yahan paste karein (backtick ke andar)
+  reviewWidget: ``,
+  // Optional: haath se review cards (client ki permission ke saath, sirf service/support ke baare me)
+  reviews: []
+};
+/* ======================================= */
 
-            <button onclick="sendQuickOrder()" class="btn btn-whatsapp" style="border:none; cursor:pointer; font-size:1rem; padding: 12px; margin-top: 1rem; width: 100%; background-color: #25D366; color: white; font-weight: bold; border-radius: 25px;">
-                💬 Send Order via WhatsApp
-            </button>
-        </div>
-    </section>
+document.querySelectorAll('[data-bind]').forEach(e=>e.textContent=CONFIG[e.dataset.bind]);
+document.getElementById('yr').textContent=new Date().getFullYear();
+if(CONFIG.gaId){const g=document.createElement('script');g.async=1;g.src='https://www.googletagmanager.com/gtag/js?id='+CONFIG.gaId;document.head.appendChild(g);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config',CONFIG.gaId);}
 
-    <!-- Customer Reviews / Testimonials -->
-    <section class="section" id="reviews">
-        <h2 class="section-title">What Our Customers & Chefs Say</h2>
-        <div class="services-grid">
-            <div class="review-card">
-                <div>
-                    <div class="rating">★★★★★</div>
-                    <p style="font-style: italic; color: #555;">"Consistency and quality are crucial for our restaurant. Fresh Veggie Hub delivers our daily morning order before 7 AM without fail. Produce is always crisp and graded perfectly."</p>
-                </div>
-                <div class="author-info">
-                    <strong>— Chef Marco R.</strong><br>
-                    <small style="color: #777;">Head Chef, The Green Bistro</small>
-                </div>
-            </div>
+const waLink = t => "https://wa.me/"+CONFIG.waNumber+"?text="+encodeURIComponent(t);
+document.querySelectorAll('[data-wa]').forEach(a=>{
+  a.href=waLink(a.dataset.wa); a.target="_blank"; a.rel="noopener";
+});
 
-            <div class="review-card">
-                <div>
-                    <div class="rating">★★★★★</div>
-                    <p style="font-style: italic; color: #555;">"Ordering through their WhatsApp builder is so easy! I select my veggies, add my custom quantities, and get fresh, thoroughly cleaned vegetables delivered to my door."</p>
-                </div>
-                <div class="author-info">
-                    <strong>— Sarah M.</strong><br>
-                    <small style="color: #777;">Regular Household Customer</small>
-                </div>
-            </div>
+/* mobile menu */
+const links=document.getElementById('links');
+document.getElementById('menu').onclick=()=>links.classList.toggle('open');
+links.querySelectorAll('a').forEach(a=>a.onclick=()=>links.classList.remove('open'));
 
-            <div class="review-card">
-                <div>
-                    <div class="rating">★★★★★</div>
-                    <p style="font-style: italic; color: #555;">"Their wholesale pricing for hotels is competitive, and their customer service is top-notch. Any last-minute quantity changes are handled smoothly on WhatsApp."</p>
-                </div>
-                <div class="author-info">
-                    <strong>— Rajesh K.</strong><br>
-                    <small style="color: #777;">Purchase Manager, Grand Hotel</small>
-                </div>
-            </div>
-        </div>
-    </section>
+/* lead form -> WhatsApp */
+document.getElementById('leadForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const name=fName.value.trim(), phone=fPhone.value.trim();
+  const okName=name.length>1, okPhone=/^[6-9]\d{9}$/.test(phone);
+  eName.style.display=okName?'none':'block';
+  ePhone.style.display=okPhone?'none':'block';
+  if(!okName||!okPhone) return;
+  const msg=
+`*Nayi Website Enquiry* 📈
+Naam: ${name}
+Mobile: ${phone}
+Service: ${fService.value}
+Branch: ${fBranch.value}
+Call ka time: ${fTime.value}
+Shehar: ${fCity.value.trim()||'-'}
+Sawal: ${fMsg.value.trim()||'-'}`;
+  ok.style.display='block';
+  if(CONFIG.sheetUrl){fetch(CONFIG.sheetUrl,{method:'POST',mode:'no-cors',body:JSON.stringify({time:new Date().toLocaleString('en-IN'),name,phone,service:fService.value,branch:fBranch.value,callTime:fTime.value,city:fCity.value.trim(),msg:fMsg.value.trim()})}).catch(()=>{});}
+  window.open(waLink(msg),'_blank');
+  e.target.reset(); fCity.value='Balotra';
+});
 
-    <!-- Frequently Asked Questions (FAQ) -->
-    <section class="section" id="faq" style="max-width: 800px;">
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        
-        <details class="faq-item">
-            <summary>What are your delivery timings for restaurants vs home delivery?</summary>
-            <p>For commercial accounts (restaurants, hotels, cafes), we deliver early mornings between 5:30 AM and 8:00 AM. For home deliveries, orders are dispatched daily between 9:00 AM and 5:00 PM.</p>
-        </details>
+/* SIP calculator */
+const inr=n=>"₹"+Math.round(n).toLocaleString('en-IN');
+function calc(){
+  const P=+rA.value, r=+rR.value, y=+rY.value, i=r/1200, n=y*12;
+  const fv=P*((Math.pow(1+i,n)-1)/i)*(1+i), inv=P*n;
+  vA.textContent=inr(P); vR.textContent=r+"%"; vY.textContent=y+" saal";
+  oT.textContent=inr(fv); oI.textContent=inr(inv); oG.textContent=inr(fv-inv);
+  sipWa.href=waLink(`Namaste, main ${inr(P)} ki monthly SIP ${y} saal ke liye (expected ${r}% return) shuru karna chahta hun. Calculator me estimated value ${inr(fv)} dikha raha hai. Kripya mujhe guide karein.`);
+}
+[rA,rR,rY].forEach(el=>el.addEventListener('input',calc)); calc();
 
-        <details class="faq-item">
-            <summary>Is there a minimum order requirement?</summary>
-            <p>There is no minimum order requirement for household deliveries! For commercial wholesale accounts, custom volume requirements apply—contact us on WhatsApp for details.</p>
-        </details>
+/* FAQ */
+document.querySelectorAll('.q button').forEach(b=>b.onclick=()=>{
+  const q=b.parentElement, was=q.classList.contains('open');
+  document.querySelectorAll('.q').forEach(x=>x.classList.remove('open'));
+  if(!was) q.classList.add('open');
+});
 
-        <details class="faq-item">
-            <summary>What payment methods do you accept?</summary>
-            <p>We accept Cash on Delivery (COD), UPI, Bank Transfers, and flexible weekly or monthly invoicing terms for verified commercial accounts.</p>
-        </details>
+/* goal planner + tabs */
+function goal(){
+  const T=+gT.value,r=+gR.value,y=+gY.value,i=r/1200,n=y*12;
+  const P=T*i/((Math.pow(1+i,n)-1)*(1+i));
+  vgT.textContent=inr(T); vgR.textContent=r+"%"; vgY.textContent=y+" saal";
+  gO.textContent=inr(P); gI.textContent=inr(P*n);
+  goalWa.href=waLink(`Namaste, mujhe ${y} saal me ${inr(T)} ka goal banana hai. Calculator ke hisaab se lagbhag ${inr(P)} monthly SIP chahiye (expected ${r}% return). Kripya mujhe plan samjhayein.`);
+}
+[gT,gR,gY].forEach(el=>el.addEventListener('input',goal)); goal();
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  boxSip.style.display=b.dataset.t==='s'?'grid':'none';
+  boxGoal.style.display=b.dataset.t==='g'?'grid':'none';
+});
 
-        <details class="faq-item">
-            <summary>How do you ensure produce freshness and cleanliness?</summary>
-            <p>Our produce is sourced daily at 4 AM directly from local farms. Items undergo thorough ozone cleaning and quality grading before being packed in hygienic, food-grade packaging.</p>
-        </details>
-    </section>
+/* IPO, reviews, about, updates */
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const MON={jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+function endDate(s){
+  const parts=String(s).split(/\s*[-–—]\s*|\s+to\s+/i), last=parts[parts.length-1];
+  const m=last.match(/(\d{1,2})\s*([A-Za-z]{3})[A-Za-z]*\.?,?\s*(\d{4})?/);
+  if(!m||MON[m[2].toLowerCase()]===undefined)return null;
+  const ym=String(s).match(/\d{4}/), y=m[3]||(ym?ym[0]:new Date().getFullYear());
+  return new Date(+y,MON[m[2].toLowerCase()],+m[1]);
+}
+function closesToday(s){
+  const d=endDate(s), n=new Date();
+  return !!d&&d.getFullYear()===n.getFullYear()&&d.getMonth()===n.getMonth()&&d.getDate()===n.getDate();
+}
+function renderIpos(list,late){
+  const sec=document.getElementById('ipo');
+  if(!list.length){sec.style.display='none';return}
+  sec.style.display='';
+  list=list.map(i=>({...i,today:closesToday(i.dates)})).sort((a,b)=>b.today-a.today);
+  ipoList.innerHTML=list.map(i=>`<div class="card rv${i.today?' closing':''}"><span class="pill${String(i.status).toLowerCase()==='open'?'':' up'}">${esc(i.status)}</span>${i.today?'<span class="pill today">⏰ Closing Today</span>':''}<h3>${esc(i.name)}</h3><p>📅 ${esc(i.dates)}<br>💰 Price Band: ${esc(i.price)}<br>📦 Lot Size: ${esc(i.lot)}</p><a target="_blank" rel="noopener" href="${waLink('Mujhe '+i.name+' IPO me apply karne me madad chahiye.'+(i.today?' Aaj last date hai.':''))}">Apply me madad lein →</a></div>`).join('');
+  if(late)ipoList.querySelectorAll('.rv').forEach(e=>io.observe(e));
+}
+function parseCSV(t){
+  const rows=[];let r=[],c='',q=false;
+  for(let i=0;i<t.length;i++){
+    const ch=t[i];
+    if(q){if(ch=='"'){if(t[i+1]=='"'){c+='"';i++}else q=false}else c+=ch}
+    else if(ch=='"')q=true;
+    else if(ch==','){r.push(c);c=''}
+    else if(ch=='\n'||ch=='\r'){if(ch=='\r'&&t[i+1]=='\n')i++;r.push(c);rows.push(r);r=[];c=''}
+    else c+=ch;
+  }
+  if(c!==''||r.length){r.push(c);rows.push(r)}
+  return rows;
+}
+if(CONFIG.ipoSheetUrl){
+  document.getElementById('ipo').style.display='none';
+  fetch(CONFIG.ipoSheetUrl).then(r=>r.text()).then(t=>{
+    const rows=parseCSV(t), h=rows.shift().map(x=>x.trim().toLowerCase());
+    const g=(r,k)=>(r[h.indexOf(k)]||'').trim();
+    const list=rows.filter(r=>g(r,'name')).map(r=>({name:g(r,'name'),dates:g(r,'dates')||'-',price:g(r,'price')||'-',lot:g(r,'lot')||'-',status:g(r,'status')||'Upcoming'}));
+    renderIpos(list,true);
+  }).catch(()=>renderIpos(CONFIG.ipos,true));
+}else renderIpos(CONFIG.ipos,false);
+gRev.innerHTML=CONFIG.googleReviews.map(g=>`<div class="gcard rv"><div class="gl">G</div><div><b>${esc(g.name)}</b><br><small>${esc(g.city)} · Google Reviews</small></div><div class="gb"><a class="btn btn-w" target="_blank" rel="noopener" href="${g.view||'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(g.name+' '+g.city)}">⭐ Reviews dekhein</a>${g.write?`<a class="btn btn-o" target="_blank" rel="noopener" href="${g.write}">✍️ Review likhein</a>`:''}</div></div>`).join('');
+if(CONFIG.reviewWidget){
+  revEmbed.innerHTML=CONFIG.reviewWidget;
+  revEmbed.querySelectorAll('script').forEach(o=>{const n=document.createElement('script');[...o.attributes].forEach(a=>n.setAttribute(a.name,a.value));n.text=o.text;o.replaceWith(n)});
+}
+revList.innerHTML=CONFIG.reviews.map(r=>`<div class="card rv"><div class="stars">★★★★★</div><p>“${esc(r.t)}”</p><b>${esc(r.n)}</b> <small>· ${esc(r.c)}</small></div>`).join('');
+if(CONFIG.photo)avatar.style.backgroundImage=`url("${CONFIG.photo}")`;
+else avatar.textContent=CONFIG.brand.trim().charAt(0).toUpperCase();
+chBtn.href=CONFIG.channelUrl||waLink("Mujhe daily market updates wale WhatsApp Channel ka link bhejein.");
+[['plBtn','playStore'],['apBtn','appStore']].forEach(([id,k])=>{const a=document.getElementById(id);CONFIG[k]?a.href=CONFIG[k]:a.style.display='none'});
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/9256695100?text=Hi!%20I'm%20visiting%20your%20website%20and%20have%20an%20inquiry." class="whatsapp-float" target="_blank">
-        💬 Order via WhatsApp
-    </a>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <p><strong>Fresh Veggie Hub</strong> | Quality You Can Trust</p>
-        <p>📍 Shop Address: Your Local Market Street, City</p>
-        <p>📞 Phone / WhatsApp: +91 92566 95100</p>
-        <br>
-        <p style="font-size: 0.8rem; color: #aaa;">© 2026 Fresh Veggie Hub. All Rights Reserved.</p>
-    </footer>
-
-    <!-- JavaScript Logic -->
-    <script>
-    function sendQuickOrder() {
-        let name = document.getElementById('custName').value.trim();
-        let phone = document.getElementById('custPhone').value.trim();
-        let address = document.getElementById('custAddress').value.trim();
-
-        if(!name || !phone || !address) {
-            alert("Please fill in your Name, Mobile Number, and Address before sending!");
-            return;
-        }
-
-        let selected = [];
-        
-        for(let i = 1; i <= 4; i++) {
-            let checkbox = document.getElementById('item' + i);
-            let qtyInput = document.getElementById('qty' + i).value.trim();
-            
-            if(checkbox.checked) {
-                let qty = qtyInput ? qtyInput : "1 unit";
-                selected.push(`${checkbox.value} (${qty})`);
-            }
-        }
-
-        if(selected.length === 0) {
-            alert("Please select at least one vegetable item!");
-            return;
-        }
-
-        let message = `*🛒 NEW VEGETABLE ORDER*%0A%0A` +
-                      `👤 *Name:* ${encodeURIComponent(name)}%0A` +
-                      `📞 *Mobile:* ${encodeURIComponent(phone)}%0A` +
-                      `📍 *Address:* ${encodeURIComponent(address)}%0A%0A` +
-                      `🥦 *Ordered Items:*%0A- ` + selected.map(item => encodeURIComponent(item)).join('%0A- ');
-
-        window.open(`https://wa.me/9256695100?text=${message}`, '_blank');
-    }
-    </script>
-
+/* reveal + counters */
+function count(el){
+  const t=+el.dataset.count, s=el.dataset.suf||''; let c=0;
+  const step=Math.max(1,Math.ceil(t/50));
+  const id=setInterval(()=>{c+=step; if(c>=t){c=t;clearInterval(id)} el.textContent=c+s},30);
+}
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(en.isIntersecting){
+    en.target.classList.add('show');
+    en.target.querySelectorAll('[data-count]').forEach(count);
+    io.unobserve(en.target);
+  }
+}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>

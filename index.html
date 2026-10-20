@@ -202,9 +202,22 @@ footer{background:#12315f;border-top:0;color:#b4c6e6}
 #revEmbed{margin-bottom:20px}
 @media(max-width:820px){.gb{margin-left:0}.grev{grid-template-columns:1fr}}
 .pill.up{background:#e8f1ff;color:#2f80ed}
-.card.closing{border:1px solid #f04438;border-top:4px solid #f04438;box-shadow:0 0 0 3px rgba(240,68,56,.12)}
-.pill.today{background:#fee4e2;color:#d92d20;margin-left:6px;animation:blink 1.4s infinite}
 @keyframes blink{50%{opacity:.55}}
+.pill{margin-right:6px}
+.pill.s-open{background:var(--greenbg);color:var(--green)}
+.pill.s-up{background:#e8f1ff;color:#2f80ed}
+.pill.s-closed,.pill.s-listed{background:#f1f2f4;color:#6b7280}
+.pill.s-close{background:#fee4e2;color:#d92d20;animation:blink 1.4s infinite}
+.pill.s-allot{background:#f1ecff;color:#6d4ae0;animation:blink 1.4s infinite}
+.pill.s-refund{background:#fff3d6;color:#b45309;animation:blink 1.4s infinite}
+.pill.s-list{background:#dcfce7;color:#15803d;animation:blink 1.4s infinite}
+.card.hot{border:1px solid var(--hc);border-top:4px solid var(--hc)}
+.card.hot-close{--hc:#f04438;box-shadow:0 0 0 3px rgba(240,68,56,.12)}
+.card.hot-allot{--hc:#6d4ae0;box-shadow:0 0 0 3px rgba(109,74,224,.12)}
+.card.hot-refund{--hc:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.14)}
+.card.hot-list{--hc:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.12)}
+#ipoList .card p{line-height:1.9}
+#ipoList .card p b{color:var(--ink);font-weight:600}
 </style>
 <meta property="og:title" content="Angel One Authorised Person – Balotra &amp; Ahmedabad">
 <meta property="og:description" content="Demat, Mutual Fund SIP, Stocks aur IPO ke liye free guidance.">
@@ -506,7 +519,7 @@ const CONFIG = {
   sheetUrl: "",                    // Google Apps Script Web App URL (leads sheet me save hone ke liye)
   gaId: "",                        // Google Analytics ID, jaise G-XXXXXXXXXX
   // Google Sheet (Publish to web > CSV) ka link. Bharne par IPO list sheet se apne aap aayegi
-  ipoSheetUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vThxJCqZ9_cSOz_OidL0MP_fyoW2qhka9OYYGTL5Hngs1flCRsTSdbEBR9aU5HBvzb0oESovoYgm7xy/pub?gid=1879798118&single=true&output=csv",
+ ipoSheetUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1LTNOrsbaB4nEzObBdLqxsmg6AxR-hEJ10m4fxT6YnupY3Wda2iPG4ghIARMyoLKry5Ic7cfgYXAI/pub?gid=1311948529&single=true&output=csv",
   // Sheet na ho to ye manual list chalegi (khali [] = section chhup jayega). Sheet use karein to ise [] kar dein
   ipos: [],
   // Google reviews: view = apni Google Business listing ka link, write = "Review likhein" ka link (khali = button nahi dikhega)
@@ -594,23 +607,55 @@ document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
 /* IPO, reviews, about, updates */
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const MON={jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
-function endDate(s){
-  const parts=String(s).split(/\s*[-–—]\s*|\s+to\s+/i), last=parts[parts.length-1];
-  const m=last.match(/(\d{1,2})\s*([A-Za-z]{3})[A-Za-z]*\.?,?\s*(\d{4})?/);
-  if(!m||MON[m[2].toLowerCase()]===undefined)return null;
-  const ym=String(s).match(/\d{4}/), y=m[3]||(ym?ym[0]:new Date().getFullYear());
-  return new Date(+y,MON[m[2].toLowerCase()],+m[1]);
+const DAY=864e5;
+const dayOf=d=>new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime();
+function pDate(s,def,after){
+  const m=String(s||'').match(/(\d{1,2})\s*([A-Za-z]{3})?[A-Za-z]*\.?,?\s*(\d{4})?/);
+  if(!m)return null;
+  const mon=m[2]?MON[m[2].toLowerCase()]:(def?def.getMonth():undefined);
+  if(mon===undefined)return null;
+  const d=new Date(m[3]?+m[3]:(def?def.getFullYear():new Date().getFullYear()),mon,+m[1]);
+  if(!m[3]&&def){
+    if(after&&d<def)d.setFullYear(d.getFullYear()+1);
+    if(!after&&d>def)d.setFullYear(d.getFullYear()-1);
+  }
+  return d;
 }
-function closesToday(s){
-  const d=endDate(s), n=new Date();
-  return !!d&&d.getFullYear()===n.getFullYear()&&d.getMonth()===n.getMonth()&&d.getDate()===n.getDate();
+function pRange(s){
+  const parts=String(s).split(/\s*[-–—]\s*|\s+to\s+/i);
+  const end=pDate(parts[parts.length-1]);
+  return {start:(parts.length>1&&end)?pDate(parts[0],end,false):null,end:end};
+}
+function ipoState(i){
+  const T=dayOf(new Date()), r=pRange(i.dates);
+  const at=x=>{const d=pDate(x,r.end,true);return d?dayOf(d):null};
+  const S=r.start?dayOf(r.start):null, E=r.end?dayOf(r.end):null, A=at(i.allot), F=at(i.refund), L=at(i.listing);
+  if(L!=null){
+    if(T>L+2*DAY)return {k:'hide'};
+    if(T>L)return {k:'listed',t:'Listed',o:7};
+    if(T===L)return {k:'list',t:'🔔 Listing Today',o:1,hot:1};
+  }
+  if(F!=null&&T===F)return {k:'refund',t:'💸 Refund Today',o:3,hot:1};
+  if(A!=null&&T===A)return {k:'allot',t:'🎯 Allotment Today',o:2,hot:1};
+  if(E!=null){
+    if(T===E)return {k:'close',t:'⏰ Closing Today',o:0,hot:1};
+    if(T>E)return {k:'closed',t:'Closed',o:6};
+  }
+  if(S!=null&&T>=S)return {k:'open',t:'Open',o:4};
+  if(S!=null&&T<S)return {k:'up',t:'Upcoming',o:5};
+  return {k:String(i.status).toLowerCase()==='open'?'open':'up',t:i.status,o:5};
 }
 function renderIpos(list,late){
   const sec=document.getElementById('ipo');
+  list=list.map(i=>({...i,st:ipoState(i)})).filter(i=>i.st.k!=='hide').sort((a,b)=>a.st.o-b.st.o);
   if(!list.length){sec.style.display='none';return}
   sec.style.display='';
-  list=list.map(i=>({...i,today:closesToday(i.dates)})).sort((a,b)=>b.today-a.today);
-  ipoList.innerHTML=list.map(i=>`<div class="card rv${i.today?' closing':''}"><span class="pill${String(i.status).toLowerCase()==='open'?'':' up'}">${esc(i.status)}</span>${i.today?'<span class="pill today">⏰ Closing Today</span>':''}<h3>${esc(i.name)}</h3><p>📅 ${esc(i.dates)}<br>💰 Price Band: ${esc(i.price)}<br>📦 Lot Size: ${esc(i.lot)}</p><a target="_blank" rel="noopener" href="${waLink('Mujhe '+i.name+' IPO me apply karne me madad chahiye.'+(i.today?' Aaj last date hai.':''))}">Apply me madad lein →</a></div>`).join('');
+  ipoList.innerHTML=list.map(i=>{
+    const s=i.st, apply=['open','up','close'].includes(s.k);
+    const rows=[['📅','Open–Close',i.dates],['💰','Price Band',i.price],['📦','Lot Size',i.lot],['🎯','Allotment',i.allot],['💸','Refund',i.refund],['📈','Listing',i.listing]].filter(x=>x[2]&&x[2]!=='-').map(x=>`${x[0]} ${x[1]}: <b>${esc(x[2])}</b>`).join('<br>');
+    const msg=apply?'Mujhe '+i.name+' IPO me apply karne me madad chahiye.'+(s.k==='close'?' Aaj last date hai.':''):'Mujhe '+i.name+' IPO ke baare me jaankari chahiye ('+s.t+').';
+    return `<div class="card rv${s.hot?' hot hot-'+s.k:''}"><span class="pill s-${s.k}">${esc(s.t)}</span><h3>${esc(i.name)}</h3><p>${rows}</p><a target="_blank" rel="noopener" href="${waLink(msg)}">${apply?'Apply me madad lein →':'Is IPO ke baare me poochhein →'}</a></div>`;
+  }).join('');
   if(late)ipoList.querySelectorAll('.rv').forEach(e=>io.observe(e));
 }
 function parseCSV(t){
@@ -630,8 +675,10 @@ if(CONFIG.ipoSheetUrl){
   document.getElementById('ipo').style.display='none';
   fetch(CONFIG.ipoSheetUrl).then(r=>r.text()).then(t=>{
     const rows=parseCSV(t), h=rows.shift().map(x=>x.trim().toLowerCase());
-    const g=(r,k)=>(r[h.indexOf(k)]||'').trim();
-    const list=rows.filter(r=>g(r,'name')).map(r=>({name:g(r,'name'),dates:g(r,'dates')||'-',price:g(r,'price')||'-',lot:g(r,'lot')||'-',status:g(r,'status')||'Upcoming'}));
+    const col=k=>h.indexOf(k), has=k=>h.findIndex(x=>x.includes(k));
+    const ix={name:col('name'),dates:col('dates'),price:col('price'),lot:col('lot'),status:col('status'),allot:has('allot'),refund:has('refund'),listing:has('listing')};
+    const cell=(r,n)=>n<0?'':(r[n]||'').trim();
+    const list=rows.filter(r=>cell(r,ix.name)).map(r=>({name:cell(r,ix.name),dates:cell(r,ix.dates)||'-',price:cell(r,ix.price)||'-',lot:cell(r,ix.lot)||'-',status:cell(r,ix.status)||'Upcoming',allot:cell(r,ix.allot),refund:cell(r,ix.refund),listing:cell(r,ix.listing)}));
     renderIpos(list,true);
   }).catch(()=>renderIpos(CONFIG.ipos,true));
 }else renderIpos(CONFIG.ipos,false);

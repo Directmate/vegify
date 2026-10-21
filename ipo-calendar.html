@@ -103,7 +103,7 @@ const CONFIG={
   brand:"Bhati-Investment",
   waNumber:"917742411438",
   apReg:"AP01061201120381",
-  ipoSheetUrl:"https://docs.google.com/spreadsheets/d/e/2PACX-1vT1LTNOrsbaB4nEzObBdLqxsmg6AxR-hEJ10m4fxT6YnupY3Wda2iPG4ghIARMyoLKry5Ic7cfgYXAI/pub?gid=1311948529&single=true&output=csv",
+  ipoSheetUrl:"https://docs.google.com/spreadsheets/d/e/2PACX-1vThxJCqZ9_cSOz_OidL0MP_fyoW2qhka9OYYGTL5Hngs1flCRsTSdbEBR9aU5HBvzb0oESovoYgm7xy/pub?gid=1879798118&single=true&output=csv",
   ipos:[] // sheet na ho to yahan haath se likh sakte hain
 };
 /* ===================================================================== */
@@ -128,6 +128,11 @@ const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 const key=d=>d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
 const dayOf=d=>new Date(d.getFullYear(),d.getMonth(),d.getDate());
 function pDate(s,def,after){
+  const str=String(s||'').trim();
+  let n=str.match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2,4})$/);
+  if(n){let d=+n[1],mo=+n[2],y=+n[3];if(y<100)y+=2000;if(mo>12)[d,mo]=[mo,d];return new Date(y,mo-1,d)}
+  n=str.match(/^(\d{4})[\/.\-](\d{1,2})[\/.\-](\d{1,2})$/);
+  if(n)return new Date(+n[1],+n[2]-1,+n[3]);
   const m=String(s||'').match(/(\d{1,2})\s*([A-Za-z]{3})?[A-Za-z]*\.?,?\s*(\d{4})?/);
   if(!m)return null;
   const mon=m[2]?MON[m[2].toLowerCase()]:(def?def.getMonth():undefined);
@@ -140,7 +145,8 @@ function pDate(s,def,after){
   return d;
 }
 function pRange(s){
-  const parts=String(s).split(/\s*[-–—]\s*|\s+to\s+/i);
+  s=String(s);
+  const parts=/\d{1,2}[\/.]\d{1,2}[\/.]\d{2,4}/.test(s)?s.split(/\s+[-–—]\s+|\s+to\s+/i):s.split(/\s*[-–—]\s*|\s+to\s+/i);
   const end=pDate(parts[parts.length-1]);
   return {start:(parts.length>1&&end)?pDate(parts[0],end,false):null,end:end};
 }

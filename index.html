@@ -219,6 +219,10 @@ footer{background:#12315f;border-top:0;color:#b4c6e6}
 .card.hot-list{--hc:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.12)}
 #ipoList .card p{line-height:1.9}
 #ipoList .card p b{color:var(--ink);font-weight:600}
+.abar{background:linear-gradient(90deg,#f1ecff,#e8f1ff);border-bottom:1px solid #d9ccff;padding:10px 0;font-size:14.5px}
+.abar .wrap{display:flex;gap:6px 16px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center}
+.ab-t{background:#6d4ae0;color:#fff;padding:3px 12px;border-radius:20px;font-weight:700;font-size:12px;letter-spacing:.4px;animation:blink 1.4s infinite}
+.abar a{color:#6d4ae0;font-weight:600}
 </style>
 <meta property="og:title" content="Angel One Authorised Person – Balotra &amp; Ahmedabad">
 <meta property="og:description" content="Demat, Mutual Fund SIP, Stocks aur IPO ke liye free guidance.">
@@ -245,6 +249,15 @@ footer{background:#12315f;border-top:0;color:#b4c6e6}
   </nav>
  </div>
 </header>
+
+<div class="abar" id="allotBar" style="display:none">
+ <div class="wrap">
+  <span class="ab-t">🎯 AAJ ALLOTMENT</span>
+  <span id="abNames"></span>
+  <a href="#ipo">Details dekhein →</a>
+  <a id="abWa" target="_blank" rel="noopener">💬 Status check me madad</a>
+ </div>
+</div>
 
 <section class="hero" id="home">
  <div class="wrap">
@@ -651,6 +664,12 @@ function ipoState(i){
 function renderIpos(list,late){
   const sec=document.getElementById('ipo');
   list=list.map(i=>({...i,st:ipoState(i)})).filter(i=>i.st.k!=='hide').sort((a,b)=>a.st.o-b.st.o);
+  const al=list.filter(i=>i.st.k==='allot'), bar=document.getElementById('allotBar');
+  if(al.length){
+    abNames.innerHTML=al.map(i=>`<b>${esc(i.name)}</b>`).join(', ')+' ka allotment aaj hai';
+    abWa.href=waLink('Mujhe '+al.map(i=>i.name).join(', ')+' IPO ka allotment status check karne me madad chahiye.');
+    bar.style.display='block';
+  }else bar.style.display='none';
   if(!list.length){sec.style.display='none';return}
   sec.style.display='';
   ipoList.innerHTML=list.map(i=>{

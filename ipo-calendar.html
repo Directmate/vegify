@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IPO Calendar – Open, Closing, Allotment, Refund aur Listing Dates | Balotra</title>
+<meta name="description" content="IPO Calendar: har IPO ki open, closing, allotment, refund aur listing date ek jagah. Angel One Authorised Person, Balotra.">
+<style>
+:root{--ink:#111827;--muted:#6b7280;--line:#e5e7eb;--soft:#f8f9fb;--accent:#2f80ed;--accentbg:#eaf3ff;--green:#16a34a;--r:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--soft);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1080px;margin:auto;padding:0 20px}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{font-weight:700;font-size:18px}.logo span{color:var(--accent)}
+.back{color:var(--muted);font-size:14.5px}.back:hover{color:var(--ink)}
+.hero{background:linear-gradient(135deg,#eaf4ff,#f7fbff);padding:46px 0 34px;text-align:center}
+.hero h1{font-size:clamp(28px,4.4vw,42px);letter-spacing:-.8px;font-weight:800}
+.hero h1:after{content:"";display:block;width:48px;height:4px;border-radius:4px;background:var(--accent);margin:12px auto 0}
+.hero p{color:var(--muted);max-width:560px;margin:14px auto 0}
+.btn{display:inline-block;padding:12px 22px;border-radius:12px;font-weight:600;border:1px solid transparent;cursor:pointer;font-size:14.5px;font-family:inherit;transition:.2s}
+.btn-g{background:var(--green);color:#fff;box-shadow:0 8px 20px rgba(22,163,74,.3)}
+.btn-w{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn-w:hover{border-color:var(--ink)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:26px 0 14px}
+.bar h2{font-size:22px;letter-spacing:-.3px}
+.bar div{display:flex;gap:8px}
+.bar .btn{padding:9px 16px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--muted);margin-bottom:14px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.dh{text-align:center;font-size:12px;font-weight:700;color:var(--muted);padding:4px 0}
+.c{min-height:62px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px 7px;cursor:pointer;transition:.2s;overflow:hidden}
+.c:hover{border-color:var(--accent)}
+.c b{font-size:13px}
+.c.e{background:none;border:0;cursor:default}
+.c.win{background:#ecfdf3}
+.c.today{border:2px solid var(--accent)}
+.c.today b{color:var(--accent)}
+.dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:5px}
+.dot{width:8px;height:8px;border-radius:50%}
+.ev{display:none;font-size:10.5px;line-height:1.25;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+@media(min-width:760px){.c{min-height:96px}.ev{display:block}.dots{display:none}}
+.list h3{font-size:19px;margin:30px 0 12px}
+.day{margin-bottom:18px;scroll-margin-top:90px}
+.day>b{display:block;font-size:14px;color:var(--muted);margin-bottom:8px}
+.day.flash>b{color:var(--accent)}
+.it{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:14px;padding:14px 18px;margin-bottom:8px}
+.day.flash .it{box-shadow:0 0 0 3px var(--accentbg)}
+.it.past{opacity:.6}
+.it strong{display:block}
+.it small{color:var(--muted);font-size:13px}
+.tag{font-size:12px;font-weight:700;padding:3px 11px;border-radius:20px;background:var(--bg);color:var(--c);margin-right:8px}
+.it a{color:var(--accent);font-weight:600;font-size:14px}
+.empty,.note{text-align:center;color:var(--muted);font-size:13px;margin:18px 0}
+.empty{background:#fff;border:1px dashed var(--line);border-radius:14px;padding:26px}
+.cta{background:linear-gradient(135deg,#e6f6ff,#eaf3ff);border:1px solid var(--line);border-radius:20px;padding:26px 28px;margin:30px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.cta h3{font-size:19px}.cta p{color:var(--muted);font-size:14.5px}
+footer{background:#12315f;color:#b4c6e6;padding:30px 0 90px;font-size:12.5px;margin-top:20px}
+footer p{margin-bottom:7px}.fl{color:#fff;font-weight:700;font-size:15px}
+.wa{position:fixed;right:18px;bottom:18px;z-index:60;background:#25d366;color:#fff;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:28px;box-shadow:0 8px 22px rgba(37,211,102,.45)}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav>
+ <a href="index.html#home" class="logo">📈 <span data-bind="brand">Your Name</span></a>
+ <a href="index.html#ipo" class="back">← Website par wapas</a>
+</nav></div></header>
+
+<section class="hero"><div class="wrap">
+ <h1>📅 IPO Calendar</h1>
+ <p>Open, closing, allotment, refund aur listing — har IPO ki date ek jagah.</p>
+</div></section>
+
+<main class="wrap">
+ <div class="bar">
+  <h2 id="mTitle">&nbsp;</h2>
+  <div><button class="btn btn-w" id="prev" aria-label="Pichla mahina">‹</button><button class="btn btn-w" id="today">Aaj</button><button class="btn btn-w" id="next" aria-label="Agla mahina">›</button></div>
+ </div>
+ <div class="legend" id="legend"></div>
+ <div class="cal" id="cal"></div>
+ <div class="list" id="list"></div>
+ <p class="note">Dates Google Sheet se aati hain. Apply karne se pehle NSE/BSE ya Angel One app par verify karein.</p>
+ <div class="cta">
+  <div><h3>IPO me apply karna hai?</h3><p>Demat account aur UPI se application me main aapki madad karunga.</p></div>
+  <a href="#" class="btn btn-g" id="ctaWa" target="_blank" rel="noopener">💬 WhatsApp Par Poochhein</a>
+ </div>
+</main>
+
+<footer><div class="wrap">
+ <p class="fl">📈 <span data-bind="brand">Your Name</span> — Authorised Person of Angel One Limited</p>
+ <p>AP Reg. No.: <span data-bind="apReg">XXXXXXXX</span></p>
+ <p>Disclaimer: Securities investment market risks ke adheen hai. Is page par di gayi jaankari sirf educational hai, investment advice nahi. IPO me allotment guaranteed nahi hota.</p>
+</div></footer>
+
+<a href="#" class="wa" id="waBtn" aria-label="WhatsApp" target="_blank" rel="noopener">💬</a>
+
+<script>
+/* ====== YAHAN APNI DETAILS BHARIYE (index.html wali hi rakhein) ====== */
+const CONFIG={
+  brand:"Bhati-Investment",
+  waNumber:"917742411438",
+  apReg:"AP01061201120381",
+  ipoSheetUrl:"https://docs.google.com/spreadsheets/d/e/2PACX-1vThxJCqZ9_cSOz_OidL0MP_fyoW2qhka9OYYGTL5Hngs1flCRsTSdbEBR9aU5HBvzb0oESovoYgm7xy/pub?gid=1879798118&single=true&output=csv",
+  ipos:[] // sheet na ho to yahan haath se likh sakte hain
+};
+/* ===================================================================== */
+document.querySelectorAll('[data-bind]').forEach(e=>e.textContent=CONFIG[e.dataset.bind]);
+const wa=t=>"https://wa.me/"+CONFIG.waNumber+"?text="+encodeURIComponent(t);
+waBtn.href=wa("Namaste, mujhe IPO ke baare me jaankari chahiye.");
+ctaWa.href=wa("Namaste, mujhe IPO me apply karne me madad chahiye.");
+
+const MON={jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const TYPES={
+  open:{t:'Open',e:'🟢',c:'#16a34a',bg:'#ecfdf3'},
+  close:{t:'Closing',e:'⏰',c:'#f04438',bg:'#fee4e2'},
+  allot:{t:'Allotment',e:'🎯',c:'#6d4ae0',bg:'#f1ecff'},
+  refund:{t:'Refund',e:'💸',c:'#d97706',bg:'#fff3d6'},
+  list:{t:'Listing',e:'📈',c:'#0284c7',bg:'#e0f4ff'}
+};
+legend.innerHTML=Object.values(TYPES).map(x=>`<span><i style="background:${x.c}"></i>${x.t}</span>`).join('')+'<span><i style="background:#bbf7d0"></i>Open rehne ke din</span>';
+
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const key=d=>d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+const dayOf=d=>new Date(d.getFullYear(),d.getMonth(),d.getDate());
+function pDate(s,def,after){
+  const m=String(s||'').match(/(\d{1,2})\s*([A-Za-z]{3})?[A-Za-z]*\.?,?\s*(\d{4})?/);
+  if(!m)return null;
+  const mon=m[2]?MON[m[2].toLowerCase()]:(def?def.getMonth():undefined);
+  if(mon===undefined)return null;
+  const d=new Date(m[3]?+m[3]:(def?def.getFullYear():new Date().getFullYear()),mon,+m[1]);
+  if(!m[3]&&def){
+    if(after&&d<def)d.setFullYear(d.getFullYear()+1);
+    if(!after&&d>def)d.setFullYear(d.getFullYear()-1);
+  }
+  return d;
+}
+function pRange(s){
+  const parts=String(s).split(/\s*[-–—]\s*|\s+to\s+/i);
+  const end=pDate(parts[parts.length-1]);
+  return {start:(parts.length>1&&end)?pDate(parts[0],end,false):null,end:end};
+}
+function parseCSV(t){
+  const rows=[];let r=[],c='',q=false;
+  for(let i=0;i<t.length;i++){
+    const ch=t[i];
+    if(q){if(ch=='"'){if(t[i+1]=='"'){c+='"';i++}else q=false}else c+=ch}
+    else if(ch=='"')q=true;
+    else if(ch==','){r.push(c);c=''}
+    else if(ch=='\n'||ch=='\r'){if(ch=='\r'&&t[i+1]=='\n')i++;r.push(c);rows.push(r);r=[];c=''}
+    else c+=ch;
+  }
+  if(c!==''||r.length){r.push(c);rows.push(r)}
+  return rows;
+}
+
+let EV={},WIN={},view=new Date(new Date().getFullYear(),new Date().getMonth(),1);
+function build(list){
+  EV={};WIN={};
+  const add=(d,type,i)=>{if(!d)return;(EV[key(d)]=EV[key(d)]||[]).push({type,i,d})};
+  list.forEach(i=>{
+    const r=pRange(i.dates), A=pDate(i.allot,r.end,true), F=pDate(i.refund,r.end,true), L=pDate(i.listing,r.end,true);
+    add(r.start,'open',i);add(r.end,'close',i);add(A,'allot',i);add(F,'refund',i);add(L,'list',i);
+    if(r.start&&r.end)for(let d=new Date(r.start);d<=r.end;d.setDate(d.getDate()+1))WIN[key(d)]=1;
+  });
+}
+function render(){
+  const y=view.getFullYear(),m=view.getMonth(),today=key(new Date()),n=new Date(y,m+1,0).getDate(),lead=new Date(y,m,1).getDay();
+  mTitle.textContent=MN[m]+' '+y;
+  let h=DN.map(d=>`<div class="dh">${d}</div>`).join('')+'<div class="c e"></div>'.repeat(lead);
+  for(let d=1;d<=n;d++){
+    const k=y+'-'+(m+1)+'-'+d, ev=EV[k]||[], types=[...new Set(ev.map(x=>x.type))];
+    h+=`<div class="c${WIN[k]?' win':''}${k===today?' today':''}" data-k="${k}"><b>${d}</b><div class="dots">${types.map(t=>`<span class="dot" style="background:${TYPES[t].c}"></span>`).join('')}</div>${ev.slice(0,2).map(x=>`<div class="ev" style="color:${TYPES[x.type].c}">${TYPES[x.type].e} ${esc(x.i.name)}</div>`).join('')}${ev.length>2?`<div class="ev" style="color:var(--muted)">+${ev.length-2} aur</div>`:''}</div>`;
+  }
+  cal.innerHTML=h;
+  const t0=dayOf(new Date()).getTime(); let out='';
+  for(let d=1;d<=n;d++){
+    const k=y+'-'+(m+1)+'-'+d, ev=EV[k];
+    if(!ev)continue;
+    const dt=new Date(y,m,d);
+    out+=`<div class="day" id="d-${k}"><b>${DN[dt.getDay()]}, ${d} ${MN[m].slice(0,3)}</b>`+ev.map(x=>{
+      const T=TYPES[x.type],apply=x.type==='open'||x.type==='close';
+      const msg=apply?`Mujhe ${x.i.name} IPO me apply karne me madad chahiye.`:`Mujhe ${x.i.name} IPO ke ${T.t} ke baare me jaankari chahiye.`;
+      const meta=[x.i.price,x.i.lot].filter(v=>v&&v!=='-').join(' • ');
+      return `<div class="it${dayOf(x.d).getTime()<t0?' past':''}" style="--c:${T.c};--bg:${T.bg}"><div><span class="tag">${T.e} ${T.t}</span><strong style="display:inline">${esc(x.i.name)}</strong>${meta?`<small style="display:block;margin-top:2px">${esc(meta)}</small>`:''}</div><a target="_blank" rel="noopener" href="${wa(msg)}">${apply?'Apply me madad lein →':'Poochhein →'}</a></div>`;
+    }).join('')+'</div>';
+  }
+  list.innerHTML=`<h3>${MN[m]} ke events</h3>`+(out||'<div class="empty">Is mahine koi IPO event nahi hai.</div>');
+  cal.querySelectorAll('.c[data-k]').forEach(c=>c.onclick=()=>{
+    const el=document.getElementById('d-'+c.dataset.k);
+    if(!el)return;
+    document.querySelectorAll('.day.flash').forEach(x=>x.classList.remove('flash'));
+    el.classList.add('flash');el.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+}
+prev.onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()-1,1);render()};
+next.onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);render()};
+today.onclick=()=>{const n=new Date();view=new Date(n.getFullYear(),n.getMonth(),1);render()};
+
+function load(list){build(list);render()}
+render();
+if(CONFIG.ipoSheetUrl){
+  fetch(CONFIG.ipoSheetUrl).then(r=>r.text()).then(t=>{
+    const rows=parseCSV(t),h=rows.shift().map(x=>x.trim().toLowerCase());
+    const col=k=>h.indexOf(k),has=k=>h.findIndex(x=>x.includes(k));
+    const ix={name:col('name'),dates:col('dates'),price:col('price'),lot:col('lot'),allot:has('allot'),refund:has('refund'),listing:has('listing')};
+    const cell=(r,n)=>n<0?'':(r[n]||'').trim();
+    load(rows.filter(r=>cell(r,ix.name)).map(r=>({name:cell(r,ix.name),dates:cell(r,ix.dates),price:cell(r,ix.price),lot:cell(r,ix.lot),allot:cell(r,ix.allot),refund:cell(r,ix.refund),listing:cell(r,ix.listing)})));
+  }).catch(()=>{load(CONFIG.ipos);list.insertAdjacentHTML('afterbegin','<div class="empty">Data load nahi ho paya. Site hosted jagah (https) par kholein, ya thodi der baad dobara try karein.</div>')});
+}else load(CONFIG.ipos);
+</script>
+</body>
+</html>

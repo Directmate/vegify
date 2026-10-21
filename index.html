@@ -223,6 +223,12 @@ footer{background:#12315f;border-top:0;color:#b4c6e6}
 .abar .wrap{display:flex;gap:6px 16px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center}
 .ab-t{background:#6d4ae0;color:#fff;padding:3px 12px;border-radius:20px;font-weight:700;font-size:12px;letter-spacing:.4px;animation:blink 1.4s infinite}
 .abar a{color:#6d4ae0;font-weight:600}
+.hall{grid-column:1/-1;background:#fff;border:1px solid #d9ccff;border-left:6px solid #6d4ae0;border-radius:18px;padding:16px 22px 6px;box-shadow:0 10px 30px rgba(109,74,224,.14)}
+.hall-h{display:flex;gap:8px 14px;align-items:center;flex-wrap:wrap;margin-bottom:6px;font-size:14.5px;color:var(--muted)}
+.hall-h a{color:#6d4ae0;font-weight:600;margin-left:auto}
+.hi{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 0;border-top:1px solid var(--line)}
+.hi b{font-size:17px}.hi small{display:block;color:var(--muted);font-size:13px}
+.hi .btn{padding:9px 16px;font-size:14px}
 </style>
 <meta property="og:title" content="Angel One Authorised Person – Balotra &amp; Ahmedabad">
 <meta property="og:description" content="Demat, Mutual Fund SIP, Stocks aur IPO ke liye free guidance.">
@@ -250,17 +256,13 @@ footer{background:#12315f;border-top:0;color:#b4c6e6}
  </div>
 </header>
 
-<div class="abar" id="allotBar" style="display:none">
- <div class="wrap">
-  <span class="ab-t">🎯 AAJ ALLOTMENT</span>
-  <span id="abNames"></span>
-  <a href="#ipo">Details dekhein →</a>
-  <a id="abWa" target="_blank" rel="noopener">💬 Status check me madad</a>
- </div>
-</div>
 
 <section class="hero" id="home">
  <div class="wrap">
+  <div class="hall" id="hAllot" style="display:none">
+   <div class="hall-h"><span class="ab-t">🎯 AAJ ALLOTMENT</span><span>In IPO ka allotment aaj hai. Apna status check karein.</span><a href="#ipo">Details dekhein →</a></div>
+   <div id="hAllotList"></div>
+  </div>
   <div>
    <span class="tag">🏆 Angel One Authorised Person • Balotra &amp; Ahmedabad</span>
    <h1>Apne paise ko <em>growth</em> ka sahi raasta dikhayein</h1>
@@ -535,6 +537,10 @@ const CONFIG = {
   sheetUrl: "",                    // Google Apps Script Web App URL (leads sheet me save hone ke liye)
   gaId: "",                        // Google Analytics ID, jaise G-XXXXXXXXXX
   // Google Sheet (Publish to web > CSV) ka link. Bharne par IPO list sheet se apne aap aayegi
+  // Option A (computer par seedha kholne par bhi chalta hai): sheet ko "Anyone with the link - Viewer" karein, link me /d/ ke baad wali ID yahan daalein
+  ipoSheetId: "",
+  ipoGid: "",                      // sheet tab ka gid (link ke aakhir me gid=...), khali = pehla tab
+  // Option B (sirf hosted site par): Publish to web CSV link
   ipoSheetUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vThxJCqZ9_cSOz_OidL0MP_fyoW2qhka9OYYGTL5Hngs1flCRsTSdbEBR9aU5HBvzb0oESovoYgm7xy/pub?gid=1879798118&single=true&output=csv",
   // Sheet na ho to ye manual list chalegi (khali [] = section chhup jayega). Sheet use karein to ise [] kar dein
   ipos: [],
@@ -626,6 +632,11 @@ const MON={jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,de
 const DAY=864e5;
 const dayOf=d=>new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime();
 function pDate(s,def,after){
+  const str=String(s||'').trim();
+  let n=str.match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2,4})$/);
+  if(n){let d=+n[1],mo=+n[2],y=+n[3];if(y<100)y+=2000;if(mo>12)[d,mo]=[mo,d];return new Date(y,mo-1,d)}
+  n=str.match(/^(\d{4})[\/.\-](\d{1,2})[\/.\-](\d{1,2})$/);
+  if(n)return new Date(+n[1],+n[2]-1,+n[3]);
   const m=String(s||'').match(/(\d{1,2})\s*([A-Za-z]{3})?[A-Za-z]*\.?,?\s*(\d{4})?/);
   if(!m)return null;
   const mon=m[2]?MON[m[2].toLowerCase()]:(def?def.getMonth():undefined);
@@ -638,7 +649,8 @@ function pDate(s,def,after){
   return d;
 }
 function pRange(s){
-  const parts=String(s).split(/\s*[-–—]\s*|\s+to\s+/i);
+  s=String(s);
+  const parts=/\d{1,2}[\/.]\d{1,2}[\/.]\d{2,4}/.test(s)?s.split(/\s+[-–—]\s+|\s+to\s+/i):s.split(/\s*[-–—]\s*|\s+to\s+/i);
   const end=pDate(parts[parts.length-1]);
   return {start:(parts.length>1&&end)?pDate(parts[0],end,false):null,end:end};
 }
@@ -664,12 +676,11 @@ function ipoState(i){
 function renderIpos(list,late){
   const sec=document.getElementById('ipo');
   list=list.map(i=>({...i,st:ipoState(i)})).filter(i=>i.st.k!=='hide').sort((a,b)=>a.st.o-b.st.o);
-  const al=list.filter(i=>i.st.k==='allot'), bar=document.getElementById('allotBar');
+  const al=list.filter(i=>i.st.k==='allot'), hb=document.getElementById('hAllot');
   if(al.length){
-    abNames.innerHTML=al.map(i=>`<b>${esc(i.name)}</b>`).join(', ')+' ka allotment aaj hai';
-    abWa.href=waLink('Mujhe '+al.map(i=>i.name).join(', ')+' IPO ka allotment status check karne me madad chahiye.');
-    bar.style.display='block';
-  }else bar.style.display='none';
+    hAllotList.innerHTML=al.map(i=>`<div class="hi"><div><b>${esc(i.name)}</b><small>${esc([i.price,i.lot].filter(v=>v&&v!=='-').join(' • '))}</small></div><a class="btn btn-g" target="_blank" rel="noopener" href="${waLink('Mujhe '+i.name+' IPO ka allotment status check karne me madad chahiye.')}">💬 Status check me madad</a></div>`).join('');
+    hb.style.display='block';
+  }else hb.style.display='none';
   if(!list.length){sec.style.display='none';return}
   sec.style.display='';
   ipoList.innerHTML=list.map(i=>{
@@ -693,16 +704,37 @@ function parseCSV(t){
   if(c!==''||r.length){r.push(c);rows.push(r)}
   return rows;
 }
-if(CONFIG.ipoSheetUrl){
-  document.getElementById('ipo').style.display='none';
+function toList(h,rows){
+  const col=k=>h.indexOf(k), has=k=>h.findIndex(x=>x.includes(k));
+  const ix={name:col('name'),dates:col('dates'),price:col('price'),lot:col('lot'),status:col('status'),allot:has('allot'),refund:has('refund'),listing:has('listing')};
+  const cell=(r,n)=>n<0?'':String(r[n]==null?'':r[n]).trim();
+  return rows.filter(r=>cell(r,ix.name)).map(r=>({name:cell(r,ix.name),dates:cell(r,ix.dates)||'-',price:cell(r,ix.price)||'-',lot:cell(r,ix.lot)||'-',status:cell(r,ix.status)||'Upcoming',allot:cell(r,ix.allot),refund:cell(r,ix.refund),listing:cell(r,ix.listing)}));
+}
+function viaGviz(ok,fail){
+  let done=false;const fn='__ipo'+Date.now();
+  const end=f=>{if(done)return;done=true;clearTimeout(tm);delete window[fn];sc.remove();f()};
+  const tm=setTimeout(()=>end(fail),8000);
+  window[fn]=res=>end(()=>{try{
+    let h=res.table.cols.map(c=>(c.label||'').trim().toLowerCase());
+    let rows=res.table.rows.map(r=>(r.c||[]).map(c=>c?(c.f!=null?c.f:(c.v!=null?c.v:'')):''));
+    if(!h.some(Boolean))h=rows.shift().map(x=>String(x).trim().toLowerCase());
+    ok(toList(h,rows));
+  }catch(e){fail()}});
+  const sc=document.createElement('script');
+  sc.src='https://docs.google.com/spreadsheets/d/'+CONFIG.ipoSheetId+'/gviz/tq?headers=1&tqx=out:json;responseHandler:'+fn+(CONFIG.ipoGid?'&gid='+CONFIG.ipoGid:'');
+  sc.onerror=()=>end(fail);
+  document.head.appendChild(sc);
+}
+function viaCsv(){
+  if(!CONFIG.ipoSheetUrl)return renderIpos(CONFIG.ipos,true);
   fetch(CONFIG.ipoSheetUrl).then(r=>r.text()).then(t=>{
     const rows=parseCSV(t), h=rows.shift().map(x=>x.trim().toLowerCase());
-    const col=k=>h.indexOf(k), has=k=>h.findIndex(x=>x.includes(k));
-    const ix={name:col('name'),dates:col('dates'),price:col('price'),lot:col('lot'),status:col('status'),allot:has('allot'),refund:has('refund'),listing:has('listing')};
-    const cell=(r,n)=>n<0?'':(r[n]||'').trim();
-    const list=rows.filter(r=>cell(r,ix.name)).map(r=>({name:cell(r,ix.name),dates:cell(r,ix.dates)||'-',price:cell(r,ix.price)||'-',lot:cell(r,ix.lot)||'-',status:cell(r,ix.status)||'Upcoming',allot:cell(r,ix.allot),refund:cell(r,ix.refund),listing:cell(r,ix.listing)}));
-    renderIpos(list,true);
+    renderIpos(toList(h,rows),true);
   }).catch(()=>renderIpos(CONFIG.ipos,true));
+}
+if(CONFIG.ipoSheetId||CONFIG.ipoSheetUrl){
+  document.getElementById('ipo').style.display='none';
+  if(CONFIG.ipoSheetId)viaGviz(l=>renderIpos(l,true),viaCsv); else viaCsv();
 }else renderIpos(CONFIG.ipos,false);
 gRev.innerHTML=CONFIG.googleReviews.map(g=>`<div class="gcard rv"><div class="gl">G</div><div><b>${esc(g.name)}</b><br><small>${esc(g.city)} · Google Reviews</small></div><div class="gb"><a class="btn btn-w" target="_blank" rel="noopener" href="${g.view||'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(g.name+' '+g.city)}">⭐ Reviews dekhein</a>${g.write?`<a class="btn btn-o" target="_blank" rel="noopener" href="${g.write}">✍️ Review likhein</a>`:''}</div></div>`).join('');
 if(CONFIG.reviewWidget){

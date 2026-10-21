@@ -155,11 +155,12 @@ h2:after{content:"";display:block;width:48px;height:4px;border-radius:4px;backgr
 .card a{color:var(--c,var(--accent))}
 .calc{background:linear-gradient(135deg,#eaf3ff,#f6faff)}
 .cbox{box-shadow:0 20px 50px rgba(17,24,39,.08)}
-.res{background:linear-gradient(135deg,#16a34a,#0f8a3f);color:#fff}
-.res small{color:#d6f5e1}
-.res .big{color:#fff}
-.row{border-top:1px solid rgba(255,255,255,.3)}
-.row b,#oG{color:#fff!important}
+.res{background:linear-gradient(135deg,#f0fdf4,#dcfce7);color:var(--ink);border:1px solid #bbf7d0}
+.res small{color:var(--muted)}
+.res .big{color:var(--ink)}
+.row{border-top:1px solid rgba(22,163,74,.22)}
+.row b{color:var(--ink)}
+#oG{color:var(--green)!important}
 .step{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 22px;text-align:center;box-shadow:0 6px 18px rgba(17,24,39,.05)}
 .step:before{width:46px;height:46px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;margin:0 auto 14px;font-size:16px;box-shadow:0 6px 14px rgba(47,128,237,.35)}
 .wi{box-shadow:0 4px 14px rgba(17,24,39,.04)}
@@ -331,6 +332,7 @@ footer{background:#12315f;border-top:0;color:#b4c6e6}
   <p class="sub rv">Chal rahe aur aane wale IPO ki jaankari. Apply karne me madad paayein.</p>
   <div class="grid" id="ipoList"></div>
   <p class="note" style="color:var(--muted)">Details apply karne se pehle NSE/BSE ya Angel One app par verify karein.</p>
+  <p style="text-align:center;margin-top:22px"><a href="ipo-calendar.html" class="btn btn-o">📅 Poora IPO Calendar Dekhein →</a></p>
  </div>
 </section>
 
@@ -455,7 +457,7 @@ footer{background:#12315f;border-top:0;color:#b4c6e6}
    <div class="info rv">
     <p>📍 <b>Bhati Investment</b> – Balotra, Rajasthan</p>
     <p>📍 <b>Manglik Investment</b> – Ahmedabad, Gujarat</p>
-    <p>📞 <span data-bind="phone">+91 7742411438</span></p>
+    <p>📞 <span data-bind="phone">+91 XXXXX XXXXX</span></p>
     <p>🕘 Mon–Sat: 10:00 AM – 7:00 PM</p>
     <p style="margin-top:20px"><a href="#" class="btn btn-g" data-wa="Namaste, mujhe aapse baat karni hai.">💬 Seedha WhatsApp Karein</a></p>
    </div>
@@ -496,8 +498,9 @@ footer{background:#12315f;border-top:0;color:#b4c6e6}
  <div class="wrap">
   <p class="fl">📈 <span data-bind="brand">Your Name</span> — Authorised Person of Angel One Limited</p>
   <p>Branches: Bhati Investment (Balotra, Rajasthan) | Manglik Investment (Ahmedabad, Gujarat)</p>
-  <p>AP Reg. No.: <span data-bind="apReg">AP01061201120381</span> | Angel One Limited SEBI Reg. No.: INZ000161534 (verify on SEBI/Angel One website)</p>
+  <p>AP Reg. No.: <span data-bind="apReg">XXXXXXXX</span> | Angel One Limited SEBI Reg. No.: INZ000161534 (verify on SEBI/Angel One website)</p>
   <p>Disclaimer: Securities investment market risks ke adheen hai, scheme se related sabhi documents dhyan se padhein. Past performance future returns ki guarantee nahi hai. Is website par di gayi jaankari sirf educational hai, investment advice nahi.</p>
+  <p><a href="ipo-calendar.html" style="color:#fff;text-decoration:underline">📅 IPO Calendar</a></p>
   <p>© <span id="yr"></span> All rights reserved.</p>
  </div>
 </footer>
@@ -512,14 +515,14 @@ const CONFIG = {
   phone: "+91 7742411438",
   address: "Balotra, Rajasthan",
   apReg: "AP01061201120381",              // apni AP registration number
-  photo: "https://scontent-del3-1.cdninstagram.com/v/t51.82787-19/792766246_18620321713050437_3523541863942809891_n.jpg?_nc_cat=106&ig_cache_key=GCanQC9FU099FSdCACNphx_oIuYwbmNDAQAB0j-ccb7-5&ccb=7-5&_nc_sid=669407&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=hgy0iow-qAcQ7kNvwHuIgRy&_nc_oc=AdozWKwY_z12A02ajHFOay5h9AiOT2wGjDx6B7biRExj24onZyT7hQzif46-vZDYc24&_nc_zt=24&_nc_ht=scontent-del3-1.cdninstagram.com&_nc_gid=t-CWyAIBt-q8u4ancn3HkQ&_nc_ss=7b6a8&oh=00_AQNBF4jslDsPlpHhdq-c33CYBv84mkfp3yhtFfesN3P0ZA&oe=6ADE03F7",                       // apni photo ka link (khali = pehla akshar dikhega)
+  photo: "",                       // apni photo ka link (khali = pehla akshar dikhega)
   channelUrl: "",                  // WhatsApp Channel ka link (khali = WhatsApp par link maangne ka message)
   playStore: "",                   // Angel One app ka apna referral link (Play Store)
   appStore: "",                    // Angel One app ka apna referral link (App Store)
   sheetUrl: "",                    // Google Apps Script Web App URL (leads sheet me save hone ke liye)
   gaId: "",                        // Google Analytics ID, jaise G-XXXXXXXXXX
   // Google Sheet (Publish to web > CSV) ka link. Bharne par IPO list sheet se apne aap aayegi
- ipoSheetUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1LTNOrsbaB4nEzObBdLqxsmg6AxR-hEJ10m4fxT6YnupY3Wda2iPG4ghIARMyoLKry5Ic7cfgYXAI/pub?gid=1311948529&single=true&output=csv",
+  ipoSheetUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vThxJCqZ9_cSOz_OidL0MP_fyoW2qhka9OYYGTL5Hngs1flCRsTSdbEBR9aU5HBvzb0oESovoYgm7xy/pub?gid=1879798118&single=true&output=csv",
   // Sheet na ho to ye manual list chalegi (khali [] = section chhup jayega). Sheet use karein to ise [] kar dein
   ipos: [],
   // Google reviews: view = apni Google Business listing ka link, write = "Review likhein" ka link (khali = button nahi dikhega)

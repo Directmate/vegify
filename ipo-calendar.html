@@ -82,7 +82,7 @@ footer p{margin-bottom:7px}.fl{color:#fff;font-weight:700;font-size:15px}
  <div class="legend" id="legend"></div>
  <div class="cal" id="cal"></div>
  <div class="list" id="list"></div>
- <p class="note">Dates Google Sheet se aati hain. Apply karne se pehle NSE/BSE ya Angel One app par verify karein.</p>
+ <p class="note">Dates Google Sheet se aati hain. Jahan sheet me date nahi hoti, wahan allotment, refund aur listing ki (est.) date SEBI ke T+3 timeline se anumaan hoti hai. Apply karne se pehle NSE/BSE ya Angel One app par verify karein.</p>
  <div class="cta">
   <div><h3>IPO me apply karna hai?</h3><p>Demat account aur UPI se application me main aapki madad karunga.</p></div>
   <a href="#" class="btn btn-g" id="ctaWa" target="_blank" rel="noopener">💬 WhatsApp Par Poochhein</a>
@@ -104,7 +104,8 @@ const CONFIG={
   waNumber:"917742411438",
   apReg:"AP01061201120381",
   ipoSheetUrl:"https://docs.google.com/spreadsheets/d/e/2PACX-1vThxJCqZ9_cSOz_OidL0MP_fyoW2qhka9OYYGTL5Hngs1flCRsTSdbEBR9aU5HBvzb0oESovoYgm7xy/pub?gid=1879798118&single=true&output=csv",
-  ipos:[] // sheet na ho to yahan haath se likh sakte hain
+  ipos:[], // sheet na ho to yahan haath se likh sakte hain
+  holidays:["20 Oct 2026","10 Nov 2026","24 Nov 2026","25 Dec 2026"] // market holidays (estimated dates me skip hote hain)
 };
 /* ===================================================================== */
 document.querySelectorAll('[data-bind]').forEach(e=>e.textContent=CONFIG[e.dataset.bind]);
@@ -150,6 +151,12 @@ function pRange(s){
   const end=pDate(parts[parts.length-1]);
   return {start:(parts.length>1&&end)?pDate(parts[0],end,false):null,end:end};
 }
+const HOL=(CONFIG.holidays||[]).map(h=>{const d=pDate(h);return d?dayOf(d).getTime():0}).filter(Boolean);
+function addWD(d,n){
+  const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+  while(n>0){x.setDate(x.getDate()+1);const w=x.getDay();if(w&&w<6&&!HOL.includes(x.getTime()))n--}
+  return x;
+}
 function parseCSV(t){
   const rows=[];let r=[],c='',q=false;
   for(let i=0;i<t.length;i++){
@@ -167,10 +174,13 @@ function parseCSV(t){
 let EV={},WIN={},view=new Date(new Date().getFullYear(),new Date().getMonth(),1);
 function build(list){
   EV={};WIN={};
-  const add=(d,type,i)=>{if(!d)return;(EV[key(d)]=EV[key(d)]||[]).push({type,i,d})};
+  const add=(d,type,i,est)=>{if(!d)return;(EV[key(d)]=EV[key(d)]||[]).push({type,i,d,est})};
   list.forEach(i=>{
-    const r=pRange(i.dates), A=pDate(i.allot,r.end,true), F=pDate(i.refund,r.end,true), L=pDate(i.listing,r.end,true);
-    add(r.start,'open',i);add(r.end,'close',i);add(A,'allot',i);add(F,'refund',i);add(L,'list',i);
+    const r=pRange(i.dates), e=r.end;
+    const one=(t,n)=>{const d=pDate(t,e,true);return d?{d,est:false}:(e?{d:addWD(e,n),est:true}:null)};
+    const A=one(i.allot,1),F=one(i.refund,2),L=one(i.listing,3);
+    add(r.start,'open',i);add(r.end,'close',i);
+    [['allot',A],['refund',F],['list',L]].forEach(x=>{if(x[1])add(x[1].d,x[0],i,x[1].est)});
     if(r.start&&r.end)for(let d=new Date(r.start);d<=r.end;d.setDate(d.getDate()+1))WIN[key(d)]=1;
   });
 }
@@ -192,7 +202,7 @@ function render(){
       const T=TYPES[x.type],apply=x.type==='open'||x.type==='close';
       const msg=apply?`Mujhe ${x.i.name} IPO me apply karne me madad chahiye.`:`Mujhe ${x.i.name} IPO ke ${T.t} ke baare me jaankari chahiye.`;
       const meta=[x.i.price,x.i.lot].filter(v=>v&&v!=='-').join(' • ');
-      return `<div class="it${dayOf(x.d).getTime()<t0?' past':''}" style="--c:${T.c};--bg:${T.bg}"><div><span class="tag">${T.e} ${T.t}</span><strong style="display:inline">${esc(x.i.name)}</strong>${meta?`<small style="display:block;margin-top:2px">${esc(meta)}</small>`:''}</div><a target="_blank" rel="noopener" href="${wa(msg)}">${apply?'Apply me madad lein →':'Poochhein →'}</a></div>`;
+      return `<div class="it${dayOf(x.d).getTime()<t0?' past':''}" style="--c:${T.c};--bg:${T.bg}"><div><span class="tag">${T.e} ${T.t}${x.est?' (est.)':''}</span><strong style="display:inline">${esc(x.i.name)}</strong>${meta?`<small style="display:block;margin-top:2px">${esc(meta)}</small>`:''}</div><a target="_blank" rel="noopener" href="${wa(msg)}">${apply?'Apply me madad lein →':'Poochhein →'}</a></div>`;
     }).join('')+'</div>';
   }
   list.innerHTML=`<h3>${MN[m]} ke events</h3>`+(out||'<div class="empty">Is mahine koi IPO event nahi hai.</div>');

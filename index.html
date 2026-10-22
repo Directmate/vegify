@@ -234,6 +234,14 @@ footer{background:#12315f;border-top:0;color:#b4c6e6}
 .hi .pill{margin-right:8px;margin-bottom:0}
 @media(min-width:821px){.links{gap:20px}}
 .pill.s-soon{background:#eef2ff;color:#4f46e5}
+.pill.s-opentoday{background:var(--greenbg);color:var(--green);animation:blink 1.4s infinite}
+.card.hot-opentoday{--hc:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.12)}
+.hg{display:flex;gap:10px 14px;align-items:flex-start;flex-wrap:wrap;padding:12px 0;border-top:1px solid var(--line)}
+.hg .pill{margin:5px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;flex:1;min-width:240px}
+.chip{display:inline-block;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:7px 14px;font-size:14px;font-weight:600;transition:.2s}
+.chip:hover{border-color:var(--accent);background:#fff}
+.chip small{display:block;font-weight:400;color:var(--muted);font-size:12px}
 </style>
 <meta property="og:title" content="Angel One Authorised Person – Balotra &amp; Ahmedabad">
 <meta property="og:description" content="Demat, Mutual Fund SIP, Stocks aur IPO ke liye free guidance.">
@@ -266,7 +274,7 @@ footer{background:#12315f;border-top:0;color:#b4c6e6}
 <section class="hero" id="home">
  <div class="wrap">
   <div class="hall" id="hAllot" style="display:none">
-   <div class="hall-h"><span class="ab-t">📌 AAJ KE IPO UPDATES</span><span>Abhi open aur aaj ke IPO events</span><a href="#ipo">Sab IPO dekhein →</a></div>
+   <div class="hall-h"><span class="ab-t">📌 AAJ KE IPO UPDATES</span><span>Aaj jis IPO ka bhi koi event hai, sab yahan hain. IPO par tap karke WhatsApp par poochhein.</span><a href="#ipo">Sab IPO dekhein →</a></div>
    <div id="hAllotList"></div>
   </div>
   <div>
@@ -539,8 +547,8 @@ const CONFIG = {
   apReg: "AP01061201120381",              // apni AP registration number
   photo: "https://scontent-del3-1.cdninstagram.com/v/t51.82787-19/792766246_18620321713050437_3523541863942809891_n.jpg?_nc_cat=106&ig_cache_key=GCanQC9FU099FSdCACNphx_oIuYwbmNDAQAB0j-ccb7-5&ccb=7-5&_nc_sid=669407&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=hgy0iow-qAcQ7kNvwHuIgRy&_nc_oc=AdozWKwY_z12A02ajHFOay5h9AiOT2wGjDx6B7biRExj24onZyT7hQzif46-vZDYc24&_nc_zt=24&_nc_ht=scontent-del3-1.cdninstagram.com&_nc_gid=aFqGKUTVOsCZv6W99-sICw&_nc_ss=7b6a8&oh=00_AQN990fl4_4RhmEifsQ8SyVV-qaAJiHnsD7WMqlZl_eC_A&oe=6ADE7477",                       // apni photo ka link (khali = pehla akshar dikhega)
   channelUrl: "",                  // WhatsApp Channel ka link (khali = WhatsApp par link maangne ka message)
-  playStore: "https://angel-one.onelink.me/Wjgr/jrpi3xkg",                   // Angel One app ka apna referral link (Play Store)
-  appStore: "https://angel-one.onelink.me/Wjgr/jrpi3xkg",                    // Angel One app ka apna referral link (App Store)
+  playStore: "",                   // Angel One app ka apna referral link (Play Store)
+  appStore: "",                    // Angel One app ka apna referral link (App Store)
   sheetUrl: "",                    // Google Apps Script Web App URL (leads sheet me save hone ke liye)
   gaId: "",                        // Google Analytics ID, jaise G-XXXXXXXXXX
   // Google Sheet (Publish to web > CSV) ka link. Bharne par IPO list sheet se apne aap aayegi
@@ -695,6 +703,7 @@ function ipoState(i){
       return o('closed','Closed',6);
     }
   }
+  if(S!=null&&T===S)return o('opentoday','🟢 Opens Today',3.5,1);
   if(S!=null&&T>=S)return o('open','Open',4);
   if(S!=null&&T<S)return o('up','Upcoming',5);
   return o(String(i.status).toLowerCase()==='open'?'open':'up',i.status,5);
@@ -702,19 +711,24 @@ function ipoState(i){
 function renderIpos(list,late){
   const sec=document.getElementById('ipo');
   list=list.map(i=>({...i,st:ipoState(i)})).filter(i=>i.st.k!=='hide').sort((a,b)=>a.st.o-b.st.o);
-  const hot=list.filter(i=>['close','list','allot','refund','open'].includes(i.st.k)), hb=document.getElementById('hAllot');
-  if(hot.length){
-    hAllotList.innerHTML=hot.map(i=>{
-      const s=i.st, apply=s.k==='open'||s.k==='close';
-      const msg=apply?'Mujhe '+i.name+' IPO me apply karne me madad chahiye.'+(s.k==='close'?' Aaj last date hai.':''):'Mujhe '+i.name+' IPO ke baare me jaankari chahiye ('+s.t+').';
-      return `<div class="hi"><div><span class="pill s-${s.k}">${esc(s.t)}</span><b>${esc(i.name)}</b><small>${esc([i.price,i.lot].filter(v=>v&&v!=='-').join(' • '))}</small></div><a class="btn ${apply?'btn-o':'btn-g'}" target="_blank" rel="noopener" href="${waLink(msg)}">${apply?'💬 Apply me madad':'💬 Status/jaankari me madad'}</a></div>`;
+  const hb=document.getElementById('hAllot');
+  const GR=[['close','⏰ Closing Today'],['list','🔔 Listing Today'],['allot','🎯 Allotment Today'],['refund','💸 Refund Today'],['opentoday','🟢 Opens Today'],['open','🟢 Abhi Open']];
+  const groups=GR.map(g=>({k:g[0],t:g[1],items:list.filter(i=>i.st.k===g[0])})).filter(g=>g.items.length);
+  if(groups.length){
+    hAllotList.innerHTML=groups.map(g=>{
+      const apply=['open','opentoday','close'].includes(g.k);
+      return `<div class="hg"><span class="pill s-${g.k}">${g.t}</span><div class="chips">${g.items.map(i=>{
+        const msg=apply?'Mujhe '+i.name+' IPO me apply karne me madad chahiye.'+(g.k==='close'?' Aaj last date hai.':''):'Mujhe '+i.name+' IPO ke baare me jaankari chahiye ('+g.t+').';
+        const meta=[i.price,i.lot].filter(v=>v&&v!=='-').join(' • ');
+        return `<a class="chip" target="_blank" rel="noopener" href="${waLink(msg)}">${esc(i.name)}${meta?`<small>${esc(meta)}</small>`:''}</a>`;
+      }).join('')}</div></div>`;
     }).join('');
     hb.style.display='block';
   }else hb.style.display='none';
   if(!list.length){sec.style.display='none';return}
   sec.style.display='';
   const cnt=k=>list.filter(i=>i.st.k===k).length;
-  ipoSum.innerHTML='<span>Total <b>'+list.length+'</b> IPO</span>'+[['open','🟢 Open'],['close','⏰ Closing Today'],['up','🔵 Upcoming'],['allot','🎯 Allotment Today'],['refund','💸 Refund Today'],['list','🔔 Listing Today'],['soon','⏳ Allotment/Refund/Listing baaki']].filter(x=>cnt(x[0])).map(x=>`<span>${x[1]}: <b>${cnt(x[0])}</b></span>`).join('');
+  ipoSum.innerHTML='<span>Total <b>'+list.length+'</b> IPO</span>'+[['opentoday','🟢 Opens Today'],['open','🟢 Open'],['close','⏰ Closing Today'],['up','🔵 Upcoming'],['allot','🎯 Allotment Today'],['refund','💸 Refund Today'],['list','🔔 Listing Today'],['soon','⏳ Allotment/Refund/Listing baaki']].filter(x=>cnt(x[0])).map(x=>`<span>${x[1]}: <b>${cnt(x[0])}</b></span>`).join('');
   const dv=o=>o?fmtD(o.d)+(o.est?' (est.)':''):'';
   ipoList.innerHTML=list.map(i=>{
     const s=i.st, z=s.z||{}, apply=['open','up','close'].includes(s.k);

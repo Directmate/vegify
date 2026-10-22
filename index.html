@@ -229,6 +229,11 @@ footer{background:#12315f;border-top:0;color:#b4c6e6}
 .hi{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 0;border-top:1px solid var(--line)}
 .hi b{font-size:17px}.hi small{display:block;color:var(--muted);font-size:13px}
 .hi .btn{padding:9px 16px;font-size:14px}
+.isum{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;font-size:14px;color:var(--muted);margin-bottom:26px}
+.isum b{color:var(--ink)}
+.hi .pill{margin-right:8px;margin-bottom:0}
+@media(min-width:821px){.links{gap:20px}}
+.pill.s-soon{background:#eef2ff;color:#4f46e5}
 </style>
 <meta property="og:title" content="Angel One Authorised Person – Balotra &amp; Ahmedabad">
 <meta property="og:description" content="Demat, Mutual Fund SIP, Stocks aur IPO ke liye free guidance.">
@@ -248,6 +253,7 @@ footer{background:#12315f;border-top:0;color:#b4c6e6}
     <a href="#branches">Branches</a>
     <a href="#calc">Calculator</a>
     <a href="#ipo">IPO</a>
+    <a href="ipo-calendar.html">IPO Calendar</a>
     <a href="#learn">Learn</a>
     <a href="#faq">FAQ</a>
     <a href="#contact" class="btn btn-o" style="padding:9px 20px">Free Account Kholein</a>
@@ -260,7 +266,7 @@ footer{background:#12315f;border-top:0;color:#b4c6e6}
 <section class="hero" id="home">
  <div class="wrap">
   <div class="hall" id="hAllot" style="display:none">
-   <div class="hall-h"><span class="ab-t">🎯 AAJ ALLOTMENT</span><span>In IPO ka allotment aaj hai. Apna status check karein.</span><a href="#ipo">Details dekhein →</a></div>
+   <div class="hall-h"><span class="ab-t">📌 AAJ KE IPO UPDATES</span><span>Abhi open aur aaj ke IPO events</span><a href="#ipo">Sab IPO dekhein →</a></div>
    <div id="hAllotList"></div>
   </div>
   <div>
@@ -344,9 +350,10 @@ footer{background:#12315f;border-top:0;color:#b4c6e6}
 <section id="ipo">
  <div class="wrap">
   <h2 class="rv">IPO Corner</h2>
-  <p class="sub rv">Chal rahe aur aane wale IPO ki jaankari. Apply karne me madad paayein.</p>
+  <p class="sub rv" style="margin-bottom:18px">Chal rahe aur aane wale IPO ki jaankari. Apply karne me madad paayein.</p>
+  <div class="isum" id="ipoSum"></div>
   <div class="grid" id="ipoList"></div>
-  <p class="note" style="color:var(--muted)">Details apply karne se pehle NSE/BSE ya Angel One app par verify karein.</p>
+  <p class="note" style="color:var(--muted)">Details apply karne se pehle NSE/BSE ya Angel One app par verify karein. Jahan (est.) likha hai, wo date SEBI ke T+3 timeline se anumaan hai, exact date exchange par dekhein.</p>
   <p style="text-align:center;margin-top:22px"><a href="ipo-calendar.html" class="btn btn-o">📅 Poora IPO Calendar Dekhein →</a></p>
  </div>
 </section>
@@ -530,7 +537,7 @@ const CONFIG = {
   phone: "+91 7742411438",
   address: "Balotra, Rajasthan",
   apReg: "AP01061201120381",              // apni AP registration number
-  photo: "",                       // apni photo ka link (khali = pehla akshar dikhega)
+  photo: "https://scontent-del3-1.cdninstagram.com/v/t51.82787-19/792766246_18620321713050437_3523541863942809891_n.jpg?_nc_cat=106&ig_cache_key=GCanQC9FU099FSdCACNphx_oIuYwbmNDAQAB0j-ccb7-5&ccb=7-5&_nc_sid=669407&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=hgy0iow-qAcQ7kNvwHuIgRy&_nc_oc=AdozWKwY_z12A02ajHFOay5h9AiOT2wGjDx6B7biRExj24onZyT7hQzif46-vZDYc24&_nc_zt=24&_nc_ht=scontent-del3-1.cdninstagram.com&_nc_gid=aFqGKUTVOsCZv6W99-sICw&_nc_ss=7b6a8&oh=00_AQN990fl4_4RhmEifsQ8SyVV-qaAJiHnsD7WMqlZl_eC_A&oe=6ADE7477",                       // apni photo ka link (khali = pehla akshar dikhega)
   channelUrl: "",                  // WhatsApp Channel ka link (khali = WhatsApp par link maangne ka message)
   playStore: "",                   // Angel One app ka apna referral link (Play Store)
   appStore: "",                    // Angel One app ka apna referral link (App Store)
@@ -544,6 +551,8 @@ const CONFIG = {
   ipoSheetUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vThxJCqZ9_cSOz_OidL0MP_fyoW2qhka9OYYGTL5Hngs1flCRsTSdbEBR9aU5HBvzb0oESovoYgm7xy/pub?gid=1879798118&single=true&output=csv",
   // Sheet na ho to ye manual list chalegi (khali [] = section chhup jayega). Sheet use karein to ise [] kar dein
   ipos: [],
+  // Market holidays (estimated allotment/refund/listing dates inhe chhod dete hain). NSE circular se verify karte rahein
+  holidays: ["20 Oct 2026","10 Nov 2026","24 Nov 2026","25 Dec 2026"],
   // Google reviews: view = apni Google Business listing ka link, write = "Review likhein" ka link (khali = button nahi dikhega)
   googleReviews: [
     {name:"Bhati Investment", city:"Balotra", view:"", write:""},
@@ -654,38 +663,62 @@ function pRange(s){
   const end=pDate(parts[parts.length-1]);
   return {start:(parts.length>1&&end)?pDate(parts[0],end,false):null,end:end};
 }
+const HOL=(CONFIG.holidays||[]).map(h=>{const d=pDate(h);return d?dayOf(d):0}).filter(Boolean);
+function addWD(d,n){
+  const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+  while(n>0){x.setDate(x.getDate()+1);const w=x.getDay();if(w&&w<6&&!HOL.includes(x.getTime()))n--}
+  return x;
+}
+const fmtD=d=>d.getDate()+' '+['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()]+' '+d.getFullYear();
+function ipoDates(i){
+  const r=pRange(i.dates), e=r.end;
+  const one=(txt,n)=>{const d=pDate(txt,e,true);return d?{d,est:false}:(e?{d:addWD(e,n),est:true}:null)};
+  return {r,A:one(i.allot,1),F:one(i.refund,2),L:one(i.listing,3)};
+}
 function ipoState(i){
-  const T=dayOf(new Date()), r=pRange(i.dates);
-  const at=x=>{const d=pDate(x,r.end,true);return d?dayOf(d):null};
-  const S=r.start?dayOf(r.start):null, E=r.end?dayOf(r.end):null, A=at(i.allot), F=at(i.refund), L=at(i.listing);
+  const T=dayOf(new Date()), z=ipoDates(i), r=z.r;
+  const S=r.start?dayOf(r.start):null, E=r.end?dayOf(r.end):null;
+  const A=z.A?dayOf(z.A.d):null, F=z.F?dayOf(z.F.d):null, L=z.L?dayOf(z.L.d):null;
+  const o=(k,t,ord,hot)=>({k,t,o:ord,hot,z});
   if(L!=null){
-    if(T>L+2*DAY)return {k:'hide'};
-    if(T>L)return {k:'listed',t:'Listed',o:7};
-    if(T===L)return {k:'list',t:'🔔 Listing Today',o:1,hot:1};
+    if(T>L)return {k:'hide'};
+    if(T===L)return o('list','🔔 Listing Today',1,1);
   }
-  if(F!=null&&T===F)return {k:'refund',t:'💸 Refund Today',o:3,hot:1};
-  if(A!=null&&T===A)return {k:'allot',t:'🎯 Allotment Today',o:2,hot:1};
+  if(F!=null&&T===F)return o('refund','💸 Refund Today',3,1);
+  if(A!=null&&T===A)return o('allot','🎯 Allotment Today',2,1);
   if(E!=null){
-    if(T===E)return {k:'close',t:'⏰ Closing Today',o:0,hot:1};
-    if(T>E)return {k:'closed',t:'Closed',o:6};
+    if(T===E)return o('close','⏰ Closing Today',0,1);
+    if(T>E){
+      if(A!=null&&T<A)return o('soon','⏳ Allotment Soon',6);
+      if(F!=null&&T<F)return o('soon','⏳ Refund Soon',6);
+      if(L!=null&&T<L)return o('soon','⏳ Listing Soon',6);
+      return o('closed','Closed',6);
+    }
   }
-  if(S!=null&&T>=S)return {k:'open',t:'Open',o:4};
-  if(S!=null&&T<S)return {k:'up',t:'Upcoming',o:5};
-  return {k:String(i.status).toLowerCase()==='open'?'open':'up',t:i.status,o:5};
+  if(S!=null&&T>=S)return o('open','Open',4);
+  if(S!=null&&T<S)return o('up','Upcoming',5);
+  return o(String(i.status).toLowerCase()==='open'?'open':'up',i.status,5);
 }
 function renderIpos(list,late){
   const sec=document.getElementById('ipo');
   list=list.map(i=>({...i,st:ipoState(i)})).filter(i=>i.st.k!=='hide').sort((a,b)=>a.st.o-b.st.o);
-  const al=list.filter(i=>i.st.k==='allot'), hb=document.getElementById('hAllot');
-  if(al.length){
-    hAllotList.innerHTML=al.map(i=>`<div class="hi"><div><b>${esc(i.name)}</b><small>${esc([i.price,i.lot].filter(v=>v&&v!=='-').join(' • '))}</small></div><a class="btn btn-g" target="_blank" rel="noopener" href="${waLink('Mujhe '+i.name+' IPO ka allotment status check karne me madad chahiye.')}">💬 Status check me madad</a></div>`).join('');
+  const hot=list.filter(i=>['close','list','allot','refund','open'].includes(i.st.k)), hb=document.getElementById('hAllot');
+  if(hot.length){
+    hAllotList.innerHTML=hot.map(i=>{
+      const s=i.st, apply=s.k==='open'||s.k==='close';
+      const msg=apply?'Mujhe '+i.name+' IPO me apply karne me madad chahiye.'+(s.k==='close'?' Aaj last date hai.':''):'Mujhe '+i.name+' IPO ke baare me jaankari chahiye ('+s.t+').';
+      return `<div class="hi"><div><span class="pill s-${s.k}">${esc(s.t)}</span><b>${esc(i.name)}</b><small>${esc([i.price,i.lot].filter(v=>v&&v!=='-').join(' • '))}</small></div><a class="btn ${apply?'btn-o':'btn-g'}" target="_blank" rel="noopener" href="${waLink(msg)}">${apply?'💬 Apply me madad':'💬 Status/jaankari me madad'}</a></div>`;
+    }).join('');
     hb.style.display='block';
   }else hb.style.display='none';
   if(!list.length){sec.style.display='none';return}
   sec.style.display='';
+  const cnt=k=>list.filter(i=>i.st.k===k).length;
+  ipoSum.innerHTML='<span>Total <b>'+list.length+'</b> IPO</span>'+[['open','🟢 Open'],['close','⏰ Closing Today'],['up','🔵 Upcoming'],['allot','🎯 Allotment Today'],['refund','💸 Refund Today'],['list','🔔 Listing Today'],['soon','⏳ Allotment/Refund/Listing baaki']].filter(x=>cnt(x[0])).map(x=>`<span>${x[1]}: <b>${cnt(x[0])}</b></span>`).join('');
+  const dv=o=>o?fmtD(o.d)+(o.est?' (est.)':''):'';
   ipoList.innerHTML=list.map(i=>{
-    const s=i.st, apply=['open','up','close'].includes(s.k);
-    const rows=[['📅','Open–Close',i.dates],['💰','Price Band',i.price],['📦','Lot Size',i.lot],['🎯','Allotment',i.allot],['💸','Refund',i.refund],['📈','Listing',i.listing]].filter(x=>x[2]&&x[2]!=='-').map(x=>`${x[0]} ${x[1]}: <b>${esc(x[2])}</b>`).join('<br>');
+    const s=i.st, z=s.z||{}, apply=['open','up','close'].includes(s.k);
+    const rows=[['📅','Open–Close',i.dates],['💰','Price Band',i.price],['📦','Lot Size',i.lot],['🎯','Allotment',dv(z.A)],['💸','Refund',dv(z.F)],['📈','Listing',dv(z.L)]].filter(x=>x[2]&&x[2]!=='-').map(x=>`${x[0]} ${x[1]}: <b>${esc(x[2])}</b>`).join('<br>');
     const msg=apply?'Mujhe '+i.name+' IPO me apply karne me madad chahiye.'+(s.k==='close'?' Aaj last date hai.':''):'Mujhe '+i.name+' IPO ke baare me jaankari chahiye ('+s.t+').';
     return `<div class="card rv${s.hot?' hot hot-'+s.k:''}"><span class="pill s-${s.k}">${esc(s.t)}</span><h3>${esc(i.name)}</h3><p>${rows}</p><a target="_blank" rel="noopener" href="${waLink(msg)}">${apply?'Apply me madad lein →':'Is IPO ke baare me poochhein →'}</a></div>`;
   }).join('');
